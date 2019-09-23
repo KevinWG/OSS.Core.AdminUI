@@ -1,3 +1,20 @@
-﻿@{
-    Layout = "_Layout";
+﻿@using Microsoft.Net.Http.Headers
+@using OSS.Common.Authrization
+@using OSS.Infrastructure.Utils
+@using OSS.Infrastructure.Web.Filters.Util
+@{
+    var isPjax = Context.Request.IsPjax();
+    Layout = isPjax ? "_LayoutPjax" : "_Layout";
+    //ViewBag.IsWap = MemberShiper.AppAuthorize.AppClient == AppClientType.Wap;
+
+    //var secs = AppInfoUtil.IsDev ? 5 : 60 * 60;
+
+    //Context.Response.Headers[HeaderNames.CacheControl] = $"public,max-age={secs}";
+    //Context.Response.Headers[HeaderNames.ETag] = AppWebInfoUtil.GetPjaxTagWithTenant();
+
+    //var pVer = Context.Request.Headers["X-PJAX-Ver"].FirstOrDefault();
+    //if (!string.IsNullOrEmpty(pVer) && AppInfoUtil.AppVersion != pVer)
+    //{
+    //    Context.Response.Headers["X-PJAX-Ver"] = AppInfoUtil.AppVersion;
+    //}
 }

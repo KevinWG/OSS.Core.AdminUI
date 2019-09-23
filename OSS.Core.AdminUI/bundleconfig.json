@@ -1,0 +1,83 @@
+﻿[
+  // css==========
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [ "wwwroot/css/site.css" ]
+  },
+
+  // js==========
+  {
+    "outputFileName": "wwwroot/js/common/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common/common.extention.js",
+      "wwwroot/js/common/common.apiajax.js",
+      "wwwroot/js/common/common.util.js",
+
+      "wwwroot/js/common/common.ospjax.js",
+      "wwwroot/js/common/common.tips.js",
+      "wwwroot/js/common/common.osstorage.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/site/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site/site.config.js",
+      "wwwroot/js/site/site.auth.tenant.js",
+      "wwwroot/js/site/site.auth.admin.js",
+      "wwwroot/js/site/site.start.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/pages/portal.login.min.js",
+    "inputFiles": [
+      "wwwroot/js/pages/portal.login.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]
+
+
+
+//{
+//  "outputFileName": "wwwroot/lib/jqupload/jquery.fileupload.min.js",
+//  "inputFiles": [
+//    "wwwroot/lib/jqupload/jquery.ui.widget.js",
+//    "wwwroot/lib/jqupload/jquery.iframe-transport.js",
+//    "wwwroot/lib/jqupload/jquery.fileupload.js",
+//    "wwwroot/lib/jqupload/jquery.xdr-transport.js"
+//  ],
+//  "minify": {
+//    "enabled": true,
+//    "renameLocals": true
+//  },
+//  "sourceMap": false
+//},
+
+
+//{
+//  "outputFileName": "wwwroot/lib/umeditor/osumeditor.min.js",
+//  "inputFiles": [
+//    "wwwroot/lib/umeditor/umeditor.config.js",
+//    "wwwroot/lib/umeditor/umeditor.js",
+//    "wwwroot/lib/umeditor/lang/zh-cn/zh-cn.js"
+//  ],
+//  "minify": {
+//    "enabled": true,
+//    "renameLocals": true
+//  },
+//  "sourceMap": false
+//},
