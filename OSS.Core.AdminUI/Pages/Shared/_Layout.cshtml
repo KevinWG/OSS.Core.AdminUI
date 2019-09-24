@@ -8,142 +8,115 @@
     <meta http-equiv="app-version" content="@AppInfoUtil.AppVersion" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>@ViewData["Title"]| @TenantShiper.TenantInfo?.plat_name </title>
-    <link rel="icon" type="image/ico" href="./img/favicon.ico" sizes="any" />
-    
+    <title> @ViewData["Title"] | OSS.AdminUI </title>
+
     @*ICONS*@
     <link href="~/lib/coreui/icons/css/coreui-icons.min.css" rel="stylesheet" />
     <link href="~/lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet" />
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
-    @*main styles*@
-    <link href="~/lib/coreui/css/style.min.css" rel="stylesheet" />
-    <link href="~/lib/pace-progress/css/pace.min.css" rel="stylesheet" />
 
+    @*main styles*@
+    <link href="~/lib/coreui/css/style.css" rel="stylesheet" />
+    <link href="~/lib/pace-progress/css/pace.min.css" rel="stylesheet" />
+   
 </head>
+
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 
-    <section id="oss-header">
-        @RenderSection("Header", required: false)
-    </section>
-
-
-
-    <header class="app-header navbar">
-        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-       
-            <img class="navbar-brand-full" src="~/lib/coreui/img/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
-            <img class="navbar-brand-minimized" src="~/lib/coreui/img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
-        </a>
-        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <ul class="nav navbar-nav d-md-down-none">
-            <li class="nav-item px-3">
-                <a class="nav-link" href="#">Dashboard</a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="#">Users</a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="#">Settings</a>
+<section id="oss-header">
+    @RenderSection("Header", required: false)
+</section>
+<header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">
+        <img class="navbar-brand-full" src="~/lib/coreui/img/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
+        <img class="navbar-brand-minimized" src="~/lib/coreui/img/brand/sygnet.svg" width="30" height="30">
+    </a>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="nav navbar-nav d-md-down-none">
+        <li class="nav-item px-3">
+            <a class="nav-link" href="#">Dashboard</a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" href="#">Users</a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" href="#">Settings</a>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
+       <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <img class="img-avatar" src="~/lib/coreui/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+            </a>
+           
+           <div class="dropdown-menu dropdown-menu-right">
+                @*<div class="dropdown-header text-center">
+                    <strong>Account</strong>
+                </div>*@
+                <a class="dropdown-item" href="#">
+                    <i class="fa cui-account-logout"></i> 注销
+                    <span class="badge badge-info">42</span>
+                </a>
+            </div>
+        </li>
+    </ul>
+</header>
+<div class="app-body">
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <li class="nav-title">Components</li>
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon icon-puzzle"></i> Base
+                </a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="base/breadcrumb.html">
+                            <i class="nav-icon icon-puzzle"></i> Breadcrumb
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
-        <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#">
-                    <i class="icon-bell"></i>
-                    <span class="badge badge-pill badge-danger">5</span>
-                </a>
-            </li>
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#">
-                    <i class="icon-list"></i>
-                </a>
-            </li>
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#">
-                    <i class="icon-location-pin"></i>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="img-avatar" src="~/lib/coreui/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
-                </a>
-          
-                <div class="dropdown-menu dropdown-menu-right">
-                    <div class="dropdown-header text-center">
-                        <strong>Account</strong>
-                    </div>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-bell-o"></i> Updates
-                        <span class="badge badge-info">42</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-envelope-o"></i> Messages
-                        <span class="badge badge-success">42</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-tasks"></i> Tasks
-                        <span class="badge badge-danger">42</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-comments"></i> Comments
-                        <span class="badge badge-warning">42</span>
-                    </a>
-                    <div class="dropdown-header text-center">
-                        <strong>Settings</strong>
-                    </div>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-user"></i> Profile
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-wrench"></i> Settings
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-usd"></i> Payments
-                        <span class="badge badge-secondary">42</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-file"></i> Projects
-                        <span class="badge badge-primary">42</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-shield"></i> Lock Account
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-lock"></i> Logout
-                    </a>
-                </div>
-            </li>
-        </ul>
-        <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <button class="navbar-toggler aside-menu-toggler d-lg-none" type="button" data-toggle="aside-menu-show">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </header>
+    </nav>
+    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+</div>
+<main class="main">
+<hr/>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</main>
 
+</div>
+    
+<footer class="app-footer">
+    <div>
+        <a href="https://coreui.io">CoreUI</a>
+        <span>&copy; 2018 creativeLabs.</span>
+    </div>
+</footer>
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/popper.js/js/popper.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
+<script src="~/lib/pace-progress/js/pace.min.js"></script>
+<script src="~/lib/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+<script src="~/lib/coreui/coreui/js/coreui.min.js"></script>
 
-
-
-    @RenderBody()
-
-
-
-
-    <!--[if IE]>
-        <script src="~/lib/es6-promise/es6-promise.min.js"></script>
-        <script src="~/lib/es6-promise/es6-promise.auto.min.js"></script>
-    <![endif]-->
-    <section id="oss-scripts">@RenderSection("Scripts", required: false)</section>
-    @*<script>$(function() { app_start(@(AppInfoUtil.IsDev ? 1 : 0)) })</script>*@
+<section id="oss-scripts">@RenderSection("Scripts", required: false)</section>
+@*<script>$(function() { app_start(@(AppInfoUtil.IsDev ? 1 : 0)) })</script>*@
 </body>
 </html>

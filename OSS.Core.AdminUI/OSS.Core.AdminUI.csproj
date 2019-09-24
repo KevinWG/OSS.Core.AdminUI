@@ -11,6 +11,9 @@
     <None Include="Pages\_ViewImports.cshtml" />
     <None Include="Pages\_ViewStart.cshtml" />
     <None Include="wwwroot\favicon.ico" />
+    <None Include="wwwroot\lib\pace-progress\css\pace.css.map" />
+    <None Include="wwwroot\lib\pace-progress\css\pace.min.css.map" />
+    <None Include="wwwroot\lib\pace-progress\js\pace.min.js" />
   </ItemGroup>
 
 
