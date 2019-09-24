@@ -79,9 +79,9 @@ var OsApi = {
             x.setRequestHeader("X-App-OsVer", findVersion());
         };
 
-        if (ajaxSetting.url.indexOf("/t/")<0) {
-            ajaxSetting.url = OsTenant.getWebRoute() + ajaxSetting.url;
-        }
+        //if (ajaxSetting.url.indexOf("/t/")<0) {
+        //    ajaxSetting.url = OsTenant.getWebRoute() + ajaxSetting.url;
+        //}
 
         if (!closeLoading)
             OsTips.showLoading();
@@ -106,7 +106,7 @@ var OsApi = {
                 } else
                     defer.resolve(res);
 
-            }).error(function(xhr, err, msg) {
+            }).fail(function(xhr, err, msg) {
 
                 if (!closeLoading)
                     OsTips.hide();

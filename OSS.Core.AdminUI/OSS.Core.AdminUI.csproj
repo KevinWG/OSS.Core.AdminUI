@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <None Include="Pages\Shared\_Layout.cshtml" />
-    <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Pages\_ViewImports.cshtml" />
     <None Include="Pages\_ViewStart.cshtml" />
     <None Include="wwwroot\favicon.ico" />
@@ -20,6 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="OSS.Infrastructure.Web" Version="0.0.1.1" />
   </ItemGroup>
 

@@ -31,7 +31,7 @@ function initailUser() {
                             if (res.isOK) {
                                 OsUser.UpdateUser(res.user);
 
-                                goTo(!res.r_url ? OsTenant.getWebRoute() + "/" : res.r_url);
+                                goTo(!res.r_url ? "/" : res.r_url);
                             } else {
                                 OsTips.showTipError(res.msg);
                             }

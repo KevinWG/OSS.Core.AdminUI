@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OSS.Tools.Config;
 
 namespace OSS.Core.AdminUI
 {
@@ -15,7 +12,7 @@ namespace OSS.Core.AdminUI
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+           ConfigUtil.Configuration = Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -47,8 +44,7 @@ namespace OSS.Core.AdminUI
             }
 
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-
+ 
             app.UseMvc();
         }
     }

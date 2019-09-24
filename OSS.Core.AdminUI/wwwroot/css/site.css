@@ -19,14 +19,14 @@ body {
 
 /*页面中心区域控制 */
 #oss-page-wraper {
-    height: 100%;
+    /*height: 100%;*/
     /*position: relative;
     min-height: 100%;
     padding-bottom: 3rem;*/
 }
 
 .ospjax-container {
-    width: 100%;
+    /*width: 100%;*/
 }
 
 #oss-header, #oss-scripts {

@@ -62,7 +62,8 @@
 var OsPjax = {
     instance: null,
 
-    changeState: function(action, url, title) {
+    changeState: function (action, url, title) {
+
         var state = this.instance.ospjax("state");
         if (url)
             state.url = url;
@@ -126,9 +127,10 @@ var OsPjax = {
         window.goTo = function (url, title) {
             osPjax.instance.ospjax("goTo", { url: url, title: title });
         };
+
         if (!isDev) { //  自动获取版本
             OsApi.isDebug = false;
-            var url = OsTenant.getWebRoute() + "/home/opv";
+            var url = "/api/sys/opv";
             osPjax.instance.ospjax("sysVer", { checkVer: true, serverUrl: url });
         }
 
@@ -137,17 +139,17 @@ var OsPjax = {
         OsPjaxEvents.firstPageLoad(curState);
     },
 
-    _getViewUrl: function(fullUrl) {
+    _getViewUrl: function (fullUrl) {
 
         let url = fullUrl;
-        var index = url.indexOf("?");
+        const index = url.indexOf("?");
 
         if (index > 0)
             url = url.substring(0, index);
 
-        if (url.indexOf("/t/") < 0) {
-            url = OsTenant.getWebRoute() + url;
-        }
+        //if (url.indexOf("/t/") < 0) {
+        //    url = OsTenant.getWebRoute() + url;
+        //}
 
         return url;
     }

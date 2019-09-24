@@ -12,9 +12,9 @@
 
     @*ICONS*@
     <link href="~/lib/coreui/icons/css/coreui-icons.min.css" rel="stylesheet" />
-    <link href="~/lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet" />
+    @*<link href="~/lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet" />
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
+    <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />*@
 
     @*main styles*@
     <link href="~/lib/coreui/css/style.css" rel="stylesheet" />
@@ -27,6 +27,7 @@
 <section id="oss-header">
     @RenderSection("Header", required: false)
 </section>
+
 <header class="app-header navbar">
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
         <span class="navbar-toggler-icon"></span>
@@ -50,15 +51,12 @@
         </li>
     </ul>
     <ul class="nav navbar-nav ml-auto">
-       <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <img class="img-avatar" src="~/lib/coreui/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
             </a>
-           
-           <div class="dropdown-menu dropdown-menu-right">
-                @*<div class="dropdown-header text-center">
-                    <strong>Account</strong>
-                </div>*@
+
+            <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">
                     <i class="fa cui-account-logout"></i> 注销
                     <span class="badge badge-info">42</span>
@@ -68,39 +66,49 @@
     </ul>
 </header>
 <div class="app-body">
-<div class="sidebar">
-    <nav class="sidebar-nav">
-        <ul class="nav">
-            <li class="nav-title">Components</li>
-            <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#">
-                    <i class="nav-icon icon-puzzle"></i> Base
-                </a>
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link" href="base/breadcrumb.html">
-                            <i class="nav-icon icon-puzzle"></i> Breadcrumb
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
-</div>
-<main class="main">
-<hr/>
-    <div class="container-fluid">
-        <div class="animated fadeIn">
-            <div class="row">
-                @RenderBody()
-            </div>
-        </div>
+    <div class="sidebar">
+        <nav class="sidebar-nav">
+            <ul class="nav">
+                <li class="nav-title">Components</li>
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#">
+                        <i class="nav-icon icon-puzzle"></i> Base
+                    </a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link"  opj-namespc="oss-pjax"
+                               href="/home/Index">
+                                <i class="nav-icon icon-puzzle"></i> Index
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" opj-namespc="oss-pjax"
+                               href="/home/test1">
+                                <i class="nav-icon icon-puzzle"></i> Test1
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" opj-namespc="oss-pjax"
+                               href="/home/test2">
+                                <i class="nav-icon icon-puzzle"></i> Test2
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <button class="sidebar-minimizer" type="button"></button>
     </div>
-</main>
+    <main class="main">
+        <div class="container-fluid"  id="oss-page-wraper">
+                <div class="ospjax-container">
+                    @RenderBody()
+                </div>
+        </div>
+    </main>
 
 </div>
-    
+
 <footer class="app-footer">
     <div>
         <a href="https://coreui.io">CoreUI</a>
@@ -109,14 +117,28 @@
 </footer>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/popper.js/js/popper.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <script src="~/lib/pace-progress/js/pace.min.js"></script>
 <script src="~/lib/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
 <script src="~/lib/coreui/coreui/js/coreui.min.js"></script>
+    
+<script src="~/lib/pjax/jquery.ospjax.js"></script>
+    
+
+<script src="~/js/common/common.extention.js"></script>
+<script src="~/js/common/common.apiajax.js"></script>
+<script src="~/js/common/common.util.js"></script>
+
+<script src="~/js/common/common.ospjax.js"></script>
+<script src="~/js/common/common.tips.js"></script>
+<script src="~/js/common/common.osstorage.js"></script>
+
+<script src="~/js/site/site.config.js"></script>
+<script src="~/js/site/site.start.js"></script>
+
 
 <section id="oss-scripts">@RenderSection("Scripts", required: false)</section>
-@*<script>$(function() { app_start(@(AppInfoUtil.IsDev ? 1 : 0)) })</script>*@
+<script>$(function() { app_start(@(AppInfoUtil.IsDev ? 1 : 0)) })</script>
 </body>
 </html>

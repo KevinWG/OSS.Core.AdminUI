@@ -1,5 +1,4 @@
 ﻿+function ($) {
-
     var defaultOption = {
         push: true,
         replace: false,
@@ -94,19 +93,16 @@
         if (opt.push || opt.replace)
             window.history.replaceState(firstState, firstState.title, firstState.url);
 
-
         $(element).on("click.pjax" + opt.nameSpc.replace(".", "_"),
             "a[opj-namespc='" + opt.nameSpc + "']",
             function(event) {
                 self.click(event);
             });
     };
-
     // 实例属性： state 是当前页面信息，   xhr 远程请求实体信息
     // 原型属性： haveSysVerCheck  是否已经开启服务器版本检查
     OSPjax.prototype = {
-        click: function(event) {
-            
+        click: function(event) {            
             var req = formatLinkEvent(event);
             if (!req)
                 return;
@@ -118,7 +114,6 @@
             this.goTo(req);
             preventDefault(event);
         },
-
         forceTo: function(url) {
             window.location.href = url;
         },
@@ -128,27 +123,21 @@
          * @returns {} 
          */
         goTo: function(req) {
-
             var osPjax = this;
             //  处理请求地址参数
             setReqUrl(osPjax.opt, req);
 
             osPjax.getContent(req).then(function(con) {
                 checkContentVsersion(osPjax.sysOpt, con);
-
                 var opt = osPjax.opt;
-
                 if (!req.popState) {
-
                     if (opt.push || opt.replace) {
                         var newState = setPageState(osPjax, con);
-
                         if (opt.push)
                             window.history.pushState(newState, newState.title, newState.url);
                         else if (opt.replace)
                             window.history.replaceState(newState, newState.title, newState.url);  
                     }
-
                 } else {
                     setPageState(osPjax, null, req.popState);
                 }
@@ -243,17 +232,14 @@
             }
             var defer = $.Deferred();
             osPjax.xhr = $.ajax(ajaxOpt).done(function(resData, textStatus, hr) {
-
                 var filterRes = !opt.method.resultFilter ? resData : opt.method.resultFilter(resData, textStatus, hr);
-
                 if (!filterRes) {
                     defer.reject(resData, textStatus, hr);
                 } else {
                     var con = formatContent(filterRes, opt, req, hr);
                     defer.resolve(con);
                 }
-
-            }).error(function(hr, textStatus, errMsg) {
+            }).fail(function(hr, textStatus, errMsg) {
                 defer.reject(errMsg, textStatus, hr);
             });
 
@@ -290,7 +276,7 @@
             serverUrl:"",
             version: findVersion,
             type: "GET",
-            intervalMins: 10
+            intervalMins: 10   
         },
 
         /**
@@ -301,9 +287,9 @@
         sysVer: function (opt) {
             if (!!opt) {
                 $.extend(this.sysOpt, opt);
-                if (this.sysOpt.checkVer && this.sysVerCheckCount === 0) {
-                    this.sysVerCheckCount = 1;
-                    checkServerVersion(this, 0);
+                if (this.sysOpt.checkVer && this.sysVerCheckCount === 0) {                 
+                    // 初始化五分钟后开始首次检测  0- 首次传入时间间隔
+                    setTimeout(function() { checkServerVersion(osPjax, 0); }, 5 * 60 * 1000);               
                 }
                 return true;
             }
@@ -321,6 +307,7 @@
     function checkServerVersion(osPjax, mins) {
         var opt = osPjax.sysOpt;
 
+        // 如果第一次加载，使用设置默认时间间隔
         mins = mins === 0 ? opt.intervalMins : mins;
         osPjax.sysVerCheckCount += 1;
 
@@ -332,7 +319,7 @@
                 }
                 if (mins < 20) mins += 1;
             })
-            .error(function() {
+            .fail(function() {
                 if (mins > 8) mins -= 1;
             }).complete(function () {
                 setTimeout(function() { checkServerVersion(osPjax, mins); }, mins * 60 * 1000);
@@ -352,7 +339,6 @@
     }
 
     function checkContentVsersion(sysOpt, con) {
-
         // 附加数据，版本号处理
         var ver = typeof sysOpt.version == "function" ? sysOpt.version() : sysOpt.version;
         if (!ver) {
@@ -423,27 +409,37 @@
      */
     function formatContent(html, opt, req, xhr) {
         var con = {};
-        con.origin = $(html);
-        con.isFull = /<html/i.test(html);
-
-        var $html = con.origin;
-
+        var $html = null;
+        con.origin = html;
+        con.isFull = /<html/i.test(html);        
+        
         if (con.isFull) {
-            if (!!opt.fragment) {
-                $html = $html.find(opt.fragment).first();
-            } else {
-                $html = $html.find("body").last();
+            var conReg=html.match(/<body[^>]*>([\s\S.]*)<\/body>/i);
+            if(conReg&&conReg.length>=2 ){
+                $html= $(conReg[1]);
+                var $container= $html.find("."+opt.fragment).first()
+                if ($container.length>0) {                
+                    $html = $container;
+                }
+            }
+            if(!$html){
+                $html = $("<div></div>");
+            }
+            var titleReg=html.match(/<title[^>]*>([\s\S.]*)<\/title>/i);
+            if(titleReg&&titleReg.length>0 ){
+                $html.append(($(titleReg[0])));
             }
         }
+
         if (!$html.hasClass(opt.fragment))
             $html = $("<div class='"+opt.fragment+"' style='display:none'></div>").append($html);
         
-        con.content = $html;
         opt.method.beforeFormat($html, con);
 
         con.title = $html.find("title").last().remove().text();
         con.scripts = $html.find("script").remove();
         con.css = $html.find("link[rel='stylesheet'],style").remove();
+        con.content = $html;
 
         if (!con.title) 
             con.title = $html.attr("title") || $html.data("title") || req.title;
@@ -626,12 +622,9 @@
         window.history.replaceState;
 
     if (isSupport) {
-
         var old = $.fn.ospjax;
-
         $.fn.ospjax = fnPjax;
         $.fn.ospjax.constructor = OSPjax;
-
         // 冲突控制权的回归处理
         $.fn.ospjax.noConflict = function() {
             $.fn.ospjax = old;
