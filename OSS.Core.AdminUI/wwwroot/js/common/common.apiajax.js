@@ -7,7 +7,7 @@ function findVersion() {
         return name && name.toLowerCase() === "app-version";
     }).attr("content");
 }
-var OsApi = {
+var OssApi = {
     isDebug: true,
     //**
     // *  请求接口post请求
@@ -84,19 +84,19 @@ var OsApi = {
         //}
 
         if (!closeLoading)
-            OsTips.showLoading();
+            OssTips.showLoading();
 
         var defer = $.Deferred();
         $.ajax(ajaxSetting)
             .done(function(res, txt, xhr) {
 
-                if (OsApi.isDebug) {
+                if (OssApi.isDebug) {
                     console.info("请求地址：" + ajaxSetting.url);
                     console.info(res);
                 }
 
                 if (!closeLoading)
-                    OsTips.hide();
+                    OssTips.hide();
 
                 res.isOK = !res.ret ? true : false;
 
@@ -109,9 +109,9 @@ var OsApi = {
             }).fail(function(xhr, err, msg) {
 
                 if (!closeLoading)
-                    OsTips.hide();
+                    OssTips.hide();
 
-                OsTips.showTipError("请求出错啦,网络可能出现问题");
+                OssTips.showTipError("请求出错啦,网络可能出现问题");
                 defer.reject(xhr, err, msg);
 
             });

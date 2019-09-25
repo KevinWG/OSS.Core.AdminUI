@@ -25,7 +25,7 @@ function initailUser() {
                     var data = self.login;
                     var url = "/portal/codeadminlogin";
 
-                    OsApi.postBtn($(event.target), url, data, true)
+                    OssApi.postBtn($(event.target), url, data, true)
                         .done(function(res) {
 
                             if (res.isOK) {
@@ -33,7 +33,7 @@ function initailUser() {
 
                                 goTo(!res.r_url ? "/" : res.r_url);
                             } else {
-                                OsTips.showTipError(res.msg);
+                                OssTips.showTipError(res.msg);
                             }
 
                         });
@@ -51,12 +51,12 @@ function initailUser() {
                     $btn.attr("disabled", "disabled");
                     $btn.text("发送中...");
 
-                    OsApi.post("/portal/sendcode", data).done(function (res) {
+                    OssApi.post("/portal/sendcode", data).done(function (res) {
 
                         if (res.isOK) {
                             setTimeout(function () { self.countBack(60, $btn); }, 1000);
                         } else
-                            OsTips.showTipError(res.msg);
+                            OssTips.showTipError(res.msg);
 
                     }).always(function (res) {
                         if (!res.isOK) {

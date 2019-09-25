@@ -1,4 +1,4 @@
-﻿var OsTips = {
+﻿var OssTips = {
     showTipInfo: function(message, secs) {
         secs = secs || 5;
         this.showTips(message, secs);
@@ -27,7 +27,7 @@
         $tip.find(".container").fadeIn(300);
         if (secs && secs > 0) {
             setTimeout(function() {
-                    OsTips.hide(400);
+                    OssTips.hide(400);
                 },
                 secs * 1000);
         }

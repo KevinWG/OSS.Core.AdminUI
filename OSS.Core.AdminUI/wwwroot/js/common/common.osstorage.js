@@ -1,4 +1,4 @@
-﻿var OsStorage = {
+﻿var OssStorage = {
     setLocal: function(key, value) {
         this._set(key, value, "local");
     },

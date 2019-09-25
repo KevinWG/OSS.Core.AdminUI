@@ -1,4 +1,4 @@
-﻿var OsUtil = {
+﻿var OssUtil = {
     /**
 *  检查结果是否存在，如果不存在转到404页
 * @param {} res 
@@ -28,7 +28,7 @@
     },
 
     getQueryId: function() {
-        var id = OsUtil.getQuery("id");
+        var id = OssUtil.getQuery("id");
         if (id)
             return id;
 
@@ -73,8 +73,5 @@
         default:
             return "未知";
         }
-    },
-    defaultVal: {
-        img: "http://img1.s.tmxiu.cn/d/qb-default.jpg"
     }
 };

@@ -9,7 +9,7 @@
     // * @returns {} 
     // */
     get: function() {
-        var admin = OsStorage.getLocal("cur_admin_info");
+        var admin = OssStorage.getLocal("cur_admin_info");
         if (admin && admin.id > 0) {
             var curTimespan = new Date().getTime();
 
@@ -28,7 +28,7 @@
 
     getRemote: function() {
         var defer = $.Deferred();
-        OsApi.get(OsAdmin.auth_url, null, true).done(function(res) {
+        OssApi.get(OsAdmin.auth_url, null, true).done(function(res) {
             if (res.isOK) {
 
                 var admin = res.data.MemberInfo;
@@ -47,12 +47,12 @@
         this._updateProps(admin);
 
         if (!admin || admin.id) {
-            OsStorage.delLocal("cur_admin_info");
+            OssStorage.delLocal("cur_admin_info");
             return;
         }
 
         admin.getTimespan = new Date().getTime();
-        OsStorage.setLocal("cur_admin_info", admin);
+        OssStorage.setLocal("cur_admin_info", admin);
     },
 
 
@@ -79,7 +79,7 @@ OsAdmin.get();
 //    methods: {
 //        quit: function(e) {
 //            e.preventDefault();
-//            OsApi.get("/portal/quit").done(function() {
+//            OssApi.get("/portal/quit").done(function() {
 //                OsAdmin.UpdateAdmin({ id: 0 });
 //                window.goTo("/");
 //            });

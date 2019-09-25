@@ -7,7 +7,7 @@
     // * @returns {} 
     // */
     get: function() {
-        var user = OsStorage.getLocal("cur_user_info");
+        var user = OssStorage.getLocal("cur_user_info");
         if (user && user.id ) {
             var curTimespan = new Date().getTime();
 
@@ -26,7 +26,7 @@
 
     getRemote: function() {
         var defer = $.Deferred();
-        OsApi.get(OsUser.auth_url, null, true).done(function(res) {
+        OssApi.get(OsUser.auth_url, null, true).done(function(res) {
             if (res.isOK) {
                 var user = res.data.MemberInfo;
                 OsUser.UpdateUser(user);
@@ -41,11 +41,11 @@
         this._updateProps(user);
 
         if (!user || user.id ) {
-            OsStorage.delLocal("cur_user_info");
+            OssStorage.delLocal("cur_user_info");
             return;
         }
         user.getTimespan = new Date().getTime();
-        OsStorage.setLocal("cur_user_info", user);
+        OssStorage.setLocal("cur_user_info", user);
     },
     _updateProps: function(curU) {
         if (!curU)
@@ -67,7 +67,7 @@
 //    methods: {
 //        quit: function(e) {
 //            e.preventDefault();
-//            OsApi.get("/portal/quit").done(function() {
+//            OssApi.get("/portal/quit").done(function() {
 //                OsUser.UpdateUser({ id: 0 });
 //                window.goTo("/");
 //            });

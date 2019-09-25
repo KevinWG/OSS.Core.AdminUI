@@ -12,22 +12,20 @@
 
     @*ICONS*@
     <link href="~/lib/coreui/icons/css/coreui-icons.min.css" rel="stylesheet" />
-    @*<link href="~/lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet" />
+    <link href="~/lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet" />
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />*@
+    <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
 
     @*main styles*@
     <link href="~/lib/coreui/css/style.css" rel="stylesheet" />
     <link href="~/lib/pace-progress/css/pace.min.css" rel="stylesheet" />
-   
+    
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
-
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
-
 <section id="oss-header">
     @RenderSection("Header", required: false)
 </section>
-
 <header class="app-header navbar">
     <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
         <span class="navbar-toggler-icon"></span>
@@ -39,17 +37,6 @@
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <ul class="nav navbar-nav d-md-down-none">
-        <li class="nav-item px-3">
-            <a class="nav-link" href="#">Dashboard</a>
-        </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" href="#">Users</a>
-        </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" href="#">Settings</a>
-        </li>
-    </ul>
     <ul class="nav navbar-nav ml-auto">
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -87,12 +74,6 @@
                                 <i class="nav-icon icon-puzzle"></i> Test1
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" opj-namespc="oss-pjax"
-                               href="/home/test2">
-                                <i class="nav-icon icon-puzzle"></i> Test2
-                            </a>
-                        </li>
                     </ul>
                 </li>
             </ul>
@@ -101,12 +82,11 @@
     </div>
     <main class="main">
         <div class="container-fluid"  id="oss-page-wraper">
-                <div class="ospjax-container">
-                    @RenderBody()
-                </div>
+            <div class="osspjax-container">
+                @RenderBody()
+            </div>
         </div>
     </main>
-
 </div>
 
 <footer class="app-footer">
@@ -116,6 +96,19 @@
     </div>
 </footer>
 
+<div id="oss-tips" class="hid">
+    <div class="container hid">
+        <div class="loading">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+        <div class="text hid">
+        </div>
+    </div>
+</div>
+
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -123,16 +116,16 @@
 <script src="~/lib/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
 <script src="~/lib/coreui/coreui/js/coreui.min.js"></script>
     
-<script src="~/lib/pjax/jquery.ospjax.js"></script>
+<script src="~/lib/pjax/jquery.osspjax.js"></script>
     
 
 <script src="~/js/common/common.extention.js"></script>
-<script src="~/js/common/common.apiajax.js"></script>
-<script src="~/js/common/common.util.js"></script>
-
-<script src="~/js/common/common.ospjax.js"></script>
-<script src="~/js/common/common.tips.js"></script>
+<script src="~/js/common/common.osstips.js"></script>
+<script src="~/js/common/common.ossutil.js"></script>
 <script src="~/js/common/common.osstorage.js"></script>
+
+<script src="~/js/common/common.apiajax.js"></script>
+<script src="~/js/common/common.osspjax.js"></script>
 
 <script src="~/js/site/site.config.js"></script>
 <script src="~/js/site/site.start.js"></script>

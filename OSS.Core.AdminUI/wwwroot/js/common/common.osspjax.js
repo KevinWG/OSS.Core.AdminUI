@@ -1,4 +1,4 @@
-﻿var OsPjaxEvents = {
+﻿var OssPjaxEvents = {
    // /**
    //* 加载远程内容之前事件
    //* @param {} ajaxOpt  ajax请求相关参数，可以更改
@@ -22,7 +22,7 @@
 
         var contentType = xhr.getResponseHeader("Content-Type");
         if (textState === 'error') {
-            OsTips.showTipError('当前请求出错，请检查网络或稍后再试!');
+            OssTips.showTipError('当前请求出错，请检查网络或稍后再试!');
             return;
         }
         if ( contentType && contentType.startWith("application/json")) {
@@ -33,10 +33,10 @@
                 window.goTo(eMsg.msg);
                 return;
             }
-            OsTips.showTipError(eMsg.msg);
+            OssTips.showTipError(eMsg.msg);
             return;
         }
-        OsTips.showTipError("当前请求超时,请稍后重试");
+        OssTips.showTipError("当前请求超时,请稍后重试");
     },
     reset: function() {
 
@@ -59,37 +59,37 @@
     }
 };
 
-var OsPjax = {
+var OssPjax = {
     instance: null,
 
     changeState: function (action, url, title) {
 
-        var state = this.instance.ospjax("state");
+        var state = this.instance.osspjax("state");
         if (url)
             state.url = url;
 
         if (title)
             state.title = title;
 
-        this.instance.ospjax("state", action, state);
+        this.instance.osspjax("state", action, state);
     },
 
     methods: {
         beforeRemote: function(ajaxOpt) {
-            OsTips.showLoading(); //  开启加载框
-            OsPjaxEvents.beforeRemote(ajaxOpt);
+            OssTips.showLoading(); //  开启加载框
+            OssPjaxEvents.beforeRemote(ajaxOpt);
         },
-        resultFilter: OsPjaxEvents.resultFilter,
-        remoteError: OsPjaxEvents.remoteError,
+        resultFilter: OssPjaxEvents.resultFilter,
+        remoteError: OssPjaxEvents.remoteError,
         beforeFormat: function($html, con) {
             con.subcss = $html.find("#oss-sub-header").remove();
             con.subscripts = $html.find("#oss-sub-scripts").remove();
         },
         cssLoading: function(con) {
-            OsTips.hide(); //  关闭加载框
+            OssTips.hide(); //  关闭加载框
 
-            OsPjaxEvents.pageReplace(con);
-            OsPjaxEvents.reset();
+            OssPjaxEvents.pageReplace(con);
+            OssPjaxEvents.reset();
 
             $("#oss-header").empty().append(con.css).append(con.subcss);
             con.css = con.subcss = [];
@@ -107,36 +107,36 @@ var OsPjax = {
             con.scripts = con.subscripts = [];
         },
 
-        trans: function($new, $old, done) { OsPjaxEvents.trans($new, $old, done) },
+        trans: function($new, $old, done) { OssPjaxEvents.trans($new, $old, done) },
         complete: function(newState) {
-            OsTips.hide();
-            OsPjaxEvents.pageLoaded(newState);
+            OssTips.hide();
+            OssPjaxEvents.pageLoaded(newState);
         }
     },
 
     start: function(isDev) {
-        var osPjax = this;
+        var ossPjax = this;
         // 初始化实例
-        osPjax.instance = $(document).ospjax({
+        ossPjax.instance = $(document).osspjax({
             wraper: "#oss-page-wraper",
-            noQuery: osPjax._getViewUrl,
+            noQuery: ossPjax._getViewUrl,
             nameSpc: "oss-pjax",
-            method: osPjax.methods
+            method: ossPjax.methods
         });
         // 定义全局goTo方法
         window.goTo = function (url, title) {
-            osPjax.instance.ospjax("goTo", { url: url, title: title });
+            ossPjax.instance.osspjax("goTo", { url: url, title: title });
         };
 
         if (!isDev) { //  自动获取版本
-            OsApi.isDebug = false;
+            OssApi.isDebug = false;
             var url = "/api/sys/opv";
-            osPjax.instance.ospjax("sysVer", { checkVer: true, serverUrl: url });
+            ossPjax.instance.osspjax("sysVer", { checkVer: true, serverUrl: url });
         }
 
         // 执行第一次页面事件
-        var curState = osPjax.instance.ospjax("state");
-        OsPjaxEvents.firstPageLoad(curState);
+        var curState = ossPjax.instance.osspjax("state");
+        OssPjaxEvents.firstPageLoad(curState);
     },
 
     _getViewUrl: function (fullUrl) {
