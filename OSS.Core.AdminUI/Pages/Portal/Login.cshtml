@@ -5,10 +5,11 @@
 
 @model OSS.Core.AdminUI.Pages.Portal.LoginModel
 @{
+      ViewData["Title"] = "登录页面";
     Layout = "_PortalLayout";
 }
 
-<div class="row justify-content-center">
+<div class="row justify-content-center" id="login-component">
     <div class="col-md-8">
         <div class="card-group">
             <div class="card p-4">
@@ -21,7 +22,8 @@
                                 <i class="icon-user"></i>
                             </span>
                         </div>
-                        <input class="form-control" type="text" placeholder="Username">
+                          <input class="form-control" type="text"  v-model="login.user_name" name="user_name" placeholder="输入用户名！">
+                                          
                     </div>
                     <div class="input-group mb-4">
                         <div class="input-group-prepend">
@@ -29,7 +31,10 @@
                                 <i class="icon-lock"></i>
                             </span>
                         </div>
-                        <input class="form-control" type="password" placeholder="Password">
+
+                             <input class="form-control" type="password"  v-model="login.password" name="password" placeholder="请输入密码！">
+            
+
                     </div>
                     <div class="row">
                         <div class="col-6">
@@ -56,3 +61,52 @@
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+
+    <script>
+
+     $(function() {
+         OssPjaxEvents.pageLoaded = initailLogin;
+    });
+
+//初始化页面验证
+function initailLogin() {
+    return new Vue({
+        el: "#login-component",
+        data: {
+            login: {
+                user_name: "sss",
+                password: "ss"
+            }            
+        },
+        methods: {
+            submit: function(event) {
+                var self = this;
+                this.$validator.validateAll().then(function(vr) {
+                    if (!vr)
+                        return;
+
+                    var data = self.login;
+                    var url = "/api/portal/codelogin";
+
+                    // OssApi.postBtn($(event.target), url, data,true)
+                    //     .done(function(res) {
+                    //        if (res.isOK) {
+                    //             goTo(!res.r_url ? "/plat/list" : res.r_url);
+                    //        } else {
+                    //            OssTips.showTipError(res.msg);
+                    //        }
+                    //    }); 
+
+                });
+            }
+        },
+        created: function() {                 
+        }
+    });
+}
+    </script>
+ 
+}
