@@ -29,7 +29,7 @@ var OssApi = {
             $btn.text(btnText);
             $btn.removeAttr("disabled");
 
-        }).then();
+        });
     },
     //**
     // *   post请求
