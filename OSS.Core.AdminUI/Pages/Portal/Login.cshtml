@@ -22,8 +22,8 @@
                                 <i class="icon-user"></i>
                             </span>
                         </div>
-                          <input class="form-control" type="text"  v-model="login.user_name" name="user_name" placeholder="输入用户名！">
-                                          
+                        <input class="form-control" type="text" 
+                               v-model="login.user_name" name="user_name" placeholder="输入用户名！">
                     </div>
                     <div class="input-group mb-4">
                         <div class="input-group-prepend">
@@ -31,6 +31,7 @@
                                 <i class="icon-lock"></i>
                             </span>
                         </div>
+                        
 
                         <input class="form-control" type="password"  v-model="login.password" name="password" placeholder="请输入密码！">
             
@@ -66,46 +67,47 @@
 
     <script>
 
-     $(function() {
-         OssPjaxEvents.pageLoaded = initailLogin;
-    });
+        $(function() {
+            OssPjaxEvents.pageLoaded = initailLogin;
+        });
 
 //初始化页面验证
-function initailLogin() {
-    return new Vue({
-        el: "#login-component",
-        data: {
-            login: {
-                user_name: "sss",
-                password: "ss"
-            }            
-        },
-        methods: {
-            submit: function(event) {
-                var self = this;
-                this.$validator.validateAll().then(function(vr) {
-                    if (!vr)
-                        return;
+        function initailLogin() {
+            return new Vue({
+                el: "#login-component",
+                data: {
+                    login: {
+                        user_name: "sss",
+                        password: "ss"
+                    }
+                },
+                methods:
+                {
+                    submit: function(event) {
+                        var self = this;
+                        this.$validator.validateAll().then(function(vr) {
+                            if (!vr)
+                                return;
 
-                    var data = self.login;
-                    var url = "/api/portal/codelogin";
+                            var data = self.login;
+                            var url = "/api/portal/codelogin";
 
-                    // OssApi.postBtn($(event.target), url, data,true)
-                    //     .done(function(res) {
-                    //        if (res.isOK) {
-                    //             goTo(!res.r_url ? "/plat/list" : res.r_url);
-                    //        } else {
-                    //            OssTips.showTipError(res.msg);
-                    //        }
-                    //    }); 
+                            // OssApi.postBtn($(event.target), url, data,true)
+                            //     .done(function(res) {
+                            //        if (res.isOK) {
+                            //             goTo(!res.r_url ? "/plat/list" : res.r_url);
+                            //        } else {
+                            //            OssTips.showTipError(res.msg);
+                            //        }
+                            //    }); 
 
-                });
-            }
-        },
-        created: function() {                 
+                        });
+                    }
+                },
+                created: function() {
+                }
+            });
         }
-    });
-}
     </script>
- 
+
 }
