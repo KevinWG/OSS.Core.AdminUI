@@ -5,12 +5,12 @@
 
 @model OSS.Core.AdminUI.Pages.Portal.LoginModel
 @{
-      ViewData["Title"] = "登录页面";
+    ViewData["Title"] = "登录页面";
     Layout = "_PortalLayout";
 }
 
-<div class="row justify-content-center" id="login-component">
-    <div class="col-md-8">
+<div class="row justify-content-center">
+    <div class="col-md-8"  id="login-component">
         <div class="card-group">
             <div class="card p-4">
                 <div class="card-body">
@@ -22,8 +22,13 @@
                                 <i class="icon-user"></i>
                             </span>
                         </div>
-                        <input class="form-control" type="text" 
-                               v-model="login.user_name" name="user_name" placeholder="输入用户名！">
+                        <input class="form-control" type="text"
+                               name="user_name" v-model="login.user_name"
+                               v-bind:class="{ 'is-invalid':errors.has('user_name')}"
+                               v-validate="'required'" data-vv-as="用户名"
+                               placeholder="输入用户名！" />
+                        
+        <div class="invalid-feedback">mmmmm {{ errors.first('user_name') }}</div>
                     </div>
                     <div class="input-group mb-4">
                         <div class="input-group-prepend">
@@ -31,10 +36,9 @@
                                 <i class="icon-lock"></i>
                             </span>
                         </div>
-                        
-
-                        <input class="form-control" type="password"  v-model="login.password" name="password" placeholder="请输入密码！">
-            
+                        @*is-invalid*@
+                        <input class="form-control" type="password" v-model="login.password" name="password" placeholder="请输入密码！">
+                        <div class="invalid-feedback"></div>
                     </div>
                     <div class="row">
                         <div class="col-6">
@@ -65,27 +69,30 @@
 @section Scripts
 {
 
+
     <script>
 
-        $(function() {
+        $(function () {
+            Vue.use(VeeValidate, { events: "blur", locale: "zh_CN" });
             OssPjaxEvents.pageLoaded = initailLogin;
         });
 
-//初始化页面验证
+        var pagVue;
+        //初始化页面验证
         function initailLogin() {
-            return new Vue({
+            pagVue =  new Vue({
                 el: "#login-component",
                 data: {
                     login: {
-                        user_name: "sss",
-                        password: "ss"
+                        user_name: "",
+                        password: ""
                     }
                 },
                 methods:
                 {
-                    submit: function(event) {
+                    submit: function (event) {
                         var self = this;
-                        this.$validator.validateAll().then(function(vr) {
+                        this.$validator.validateAll().then(function (vr) {
                             if (!vr)
                                 return;
 
@@ -99,14 +106,16 @@
                             //        } else {
                             //            OssTips.showTipError(res.msg);
                             //        }
-                            //    }); 
+                            //    });
 
                         });
                     }
                 },
-                created: function() {
+                created: function () {
                 }
             });
+
+            return pagVue;
         }
     </script>
 

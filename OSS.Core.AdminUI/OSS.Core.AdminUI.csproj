@@ -6,7 +6,7 @@
 
 
   <ItemGroup>
-    <Folder Include="Pages\Shared\Components\" />
+    <Folder Include="Pages\Shared\Partails\Components\" />
   </ItemGroup>
 
 
