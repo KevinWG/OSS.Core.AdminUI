@@ -1,31 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="Pages\Shared\_Layout.cshtml" />
-    <None Include="Pages\_ViewImports.cshtml" />
-    <None Include="Pages\_ViewStart.cshtml" />
-    <None Include="wwwroot\favicon.ico" />
-    <None Include="wwwroot\lib\pace-progress\css\pace.css.map" />
-    <None Include="wwwroot\lib\pace-progress\css\pace.min.css.map" />
-    <None Include="wwwroot\lib\pace-progress\js\pace.min.js" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
-    <PackageReference Include="OSS.Infrastructure.Web" Version="0.0.1.1" />
-  </ItemGroup>
 
 
   <ItemGroup>
     <Folder Include="Pages\Shared\Components\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="OSS.Infrastructure.Web" Version="0.0.2" />
   </ItemGroup>
 
 </Project>

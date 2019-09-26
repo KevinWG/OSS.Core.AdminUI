@@ -2,9 +2,9 @@
 using OSS.Infrastructure.Utils;
 
 namespace OSS.Core.AdminUI.Apis
-{ 
-    [Route("api/[controller]/[action]")]
+{
     [ApiController]
+    [Route("api/[controller]/[action]")]
     public class SysController : ControllerBase
     {
         public string Opv()
