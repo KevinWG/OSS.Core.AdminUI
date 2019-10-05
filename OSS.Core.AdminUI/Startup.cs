@@ -1,12 +1,11 @@
-using System;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OSS.Infrastructure.Web.Filters.Web;
+using OSS.Infrastructure.Web.Middlewares;
+using OSS.Infrastructure.Web.Middlewares.Web.Auth;
+using OSS.Infrastructure.Web.PageFilters;
 using OSS.Tools.Config;
 
 namespace OSS.Core.AdminUI
@@ -23,8 +22,11 @@ namespace OSS.Core.AdminUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(opt => { opt.Filters.Add(new WAdminPortalAuthAttribute()); });
-            services.AddRazorPages(opt =>{});
+            services.AddControllers();
+            services.AddRazorPages(opt =>
+            {
+                opt.Conventions.ConfigureFilter(new PageETageFilter());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,7 +44,8 @@ namespace OSS.Core.AdminUI
             app.UseStaticFiles();
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseWebExceptionMiddleware(); // ³õÊ¼¹þÈ«¾Ö´íÎó
+            app.UseWebInitialAppInfoMiddleware();
 
             app.UseEndpoints(endpoints =>
             {

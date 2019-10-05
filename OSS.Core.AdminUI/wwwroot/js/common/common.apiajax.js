@@ -102,7 +102,7 @@ var OssApi = {
 
                 if (res.ret === 1425 && res.msg.indexOf("/") >= 0) {
                     defer.reject(xhr, txt, res);
-                    window.goTo(res.msg);
+                    location.href =  res.msg ;
                 } else
                     defer.resolve(res);
 

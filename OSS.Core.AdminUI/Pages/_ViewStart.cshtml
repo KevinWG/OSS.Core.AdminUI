@@ -1,7 +1,7 @@
 ﻿@using Microsoft.Net.Http.Headers
 @using OSS.Common.Authrization
 @using OSS.Infrastructure.Utils
-@using OSS.Infrastructure.Web.Filters.Util
+@using OSS.Infrastructure.Web.Utils
 @{
     var isPjax = Context.Request.IsPjax();
     Layout = isPjax ? "_LayoutPjax" : "_Layout";

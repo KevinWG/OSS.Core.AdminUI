@@ -1,5 +1,4 @@
 ﻿@using OSS.Infrastructure.Utils
-@using OSS.Infrastructure.Web.Filters.Util
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,92 +12,94 @@
     <partial name="Partails/_HeaderCssPartial" />
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
-    <section id="oss-header">
-        @RenderSection("Header", required: false)
-    </section>
-    <header class="app-header navbar">
-        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-            <img class="navbar-brand-full" src="~/lib/coreui/img/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
-            <img class="navbar-brand-minimized" src="~/lib/coreui/img/brand/sygnet.svg" width="30" height="30">
-        </a>
-        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="img-avatar" src="~/lib/coreui/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+<section id="oss-header">
+    @RenderSection("Header", required: false)
+</section>
+<header class="app-header navbar">
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">
+        <img class="navbar-brand-full" src="~/lib/coreui/img/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
+        <img class="navbar-brand-minimized" src="~/lib/coreui/img/brand/sygnet.svg" width="30" height="30">
+    </a>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <img class="img-avatar" src="~/lib/coreui/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="/portal/logout">
+                    <i class="fa cui-account-logout"></i> 注销
+                    <span class="badge badge-info">42</span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">
-                        <i class="fa cui-account-logout"></i> 注销
-                        <span class="badge badge-info">42</span>
+            </div>
+        </li>
+    </ul>
+</header>
+
+<div class="app-body">
+    <div class="sidebar">
+        <nav class="sidebar-nav">
+            <ul class="nav">
+                <li class="nav-title">菜单管理</li>
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#">
+                        <i class="nav-icon icon-puzzle"></i> 示例
                     </a>
-                </div>
-            </li>
-        </ul>
-    </header>
-    <div class="app-body">
-        <div class="sidebar">
-            <nav class="sidebar-nav">
-                <ul class="nav">
-                    <li class="nav-title">菜单管理</li>
-                    <li class="nav-item nav-dropdown">
-                        <a class="nav-link nav-dropdown-toggle" href="#">
-                            <i class="nav-icon icon-puzzle"></i> 示例
-                        </a>
-                        <ul class="nav-dropdown-items">
-                            <li class="nav-item">
-                                <a class="nav-link" opj-namespc="oss-pjax"
-                                   href="/home/Index">
-                                    <i class="nav-icon icon-puzzle"></i> Index
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" opj-namespc="oss-pjax"
-                                   href="/home/test1">
-                                    <i class="nav-icon icon-puzzle"></i> Test1
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            <button class="sidebar-minimizer" type="button"></button>
-        </div>
-        <main class="main">
-            <div class="container-fluid" id="oss-page-wraper">
-                <div class="osspjax-container">
-                    @RenderBody()
-                </div>
-            </div>
-        </main>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link" opj-namespc="oss-pjax"
+                               href="/home/Index">
+                                <i class="nav-icon icon-puzzle"></i> Index
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" opj-namespc="oss-pjax"
+                               href="/home/test1">
+                                <i class="nav-icon icon-puzzle"></i> Test1
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <button class="sidebar-minimizer" type="button"></button>
     </div>
-
-    <footer class="app-footer">
-        <div>
-            <a href="https://coreui.io">CoreUI</a>
-            <span>&copy; 2018 creativeLabs.</span>
+    <main class="main">
+        <div class="container-fluid" id="oss-page-wraper">
+            <div class="osspjax-container">
+                @RenderBody()
+            </div>
         </div>
-    </footer>
+    </main>
+</div>
 
-    <div id="oss-tips" class="hid">
-        <div class="container hid">
-            <div class="loading">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-            </div>
-            <div class="text hid">
-            </div>
+<footer class="app-footer">
+    <div>
+        <a href="https://coreui.io">CoreUI</a>
+        <span>&copy; 2018 creativeLabs.</span>
+    </div>
+</footer>
+
+<div id="oss-tips" class="hid">
+    <div class="container hid">
+        <div class="loading">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+        <div class="text hid">
         </div>
     </div>
-    <partial name="Partails/_FooterScriptPartial" />
+</div>
 
-    <section id="oss-scripts">@RenderSection("Scripts", required: false)</section>
-    <script>$(function() { app_start(@(AppInfoUtil.IsDev ? 1 : 0)) })</script>
+<partial name="Partails/_FooterScriptPartial" />
+
+<section id="oss-scripts">@RenderSection("Scripts", required: false)</section>
+<script>$(function() { app_start(@(AppInfoUtil.IsDev ? 1 : 0)) })</script>
 </body>
 </html>

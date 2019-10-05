@@ -1,16 +1,12 @@
 ﻿@page
-
-@using OSS.Infrastructure.Utils
-@using OSS.Infrastructure.Web.Filters.Util
-
-@model OSS.Core.AdminUI.Pages.Portal.LoginModel
+@model OSS.Core.AdminUI.Apis.Mem.AnonymousModel
 @{
     ViewData["Title"] = "登录页面";
-    Layout = "_PortalLayout";
+    Layout = "~/Pages/Portal/_PortalLayout.cshtml";
 }
 
 <div class="row justify-content-center">
-    <div class="col-md-8"  id="login-component">
+    <div class="col-md-8" id="login-component">
         <div class="card-group">
             <div class="card p-4">
                 <div class="card-body">
@@ -27,8 +23,8 @@
                                v-bind:class="{ 'is-invalid':errors.has('user_name')}"
                                v-validate="'required'" data-vv-as="用户名"
                                placeholder="输入用户名！" />
-                        
-        <div class="invalid-feedback">mmmmm {{ errors.first('user_name') }}</div>
+
+                        <div class="invalid-feedback">{{ errors.first('user_name') }}</div>
                     </div>
                     <div class="input-group mb-4">
                         <div class="input-group-prepend">
@@ -80,7 +76,7 @@
         var pagVue;
         //初始化页面验证
         function initailLogin() {
-            pagVue =  new Vue({
+            pagVue = new Vue({
                 el: "#login-component",
                 data: {
                     login: {

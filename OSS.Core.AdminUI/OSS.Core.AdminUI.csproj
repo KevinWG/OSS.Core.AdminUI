@@ -11,7 +11,13 @@
 
 
   <ItemGroup>
-    <PackageReference Include="OSS.Infrastructure.Web" Version="0.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\OSS.CorePro\Common\OSS.Infrastructure\OSS.Infrastructure.Web\OSS.Infrastructure.Web.csproj" />
   </ItemGroup>
 
 </Project>

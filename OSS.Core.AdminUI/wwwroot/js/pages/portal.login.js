@@ -39,34 +39,7 @@ function initailUser() {
                         });
                 });
             },
-            send: function (event) {
-                var self = this;
-
-                self.$validator.validate("name").then(function (vr) {
-                    if (!vr)
-                        return;
-
-                    var data = self.login;
-                    var $btn = $(event.target);
-                    $btn.attr("disabled", "disabled");
-                    $btn.text("发送中...");
-
-                    OssApi.post("/portal/sendcode", data).done(function (res) {
-
-                        if (res.isOK) {
-                            setTimeout(function () { self.countBack(60, $btn); }, 1000);
-                        } else
-                            OssTips.showTipError(res.msg);
-
-                    }).always(function (res) {
-                        if (!res.isOK) {
-                            $btn.removeAttr("disabled");
-                            $btn.text("重新尝试");
-                        }
-                    });
-
-                });
-            },
+         
             countBack: function (count, $btn) {
                 if (count === 0) {
                     $btn.removeAttr("disabled");
