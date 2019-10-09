@@ -34,16 +34,5 @@
       "renameLocals": true
     },
     "sourceMap": false
-  },
-  {
-    "outputFileName": "wwwroot/js/pages/portal.login.min.js",
-    "inputFiles": [
-      "wwwroot/js/pages/portal.login.js"
-    ],
-    "minify": {
-      "enabled": true,
-      "renameLocals": true
-    },
-    "sourceMap": false
   }
 ]

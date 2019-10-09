@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OSS.Infrastructure.Utils;
 using OSS.Infrastructure.Web.Middlewares.Web;
-using OSS.Infrastructure.Web.Middlewares.Web.Auth;
 
 namespace OSS.Core.AdminUI.Apis
 {
@@ -9,15 +8,13 @@ namespace OSS.Core.AdminUI.Apis
     /// 接口控制器基类
     /// </summary>
     [WebApiAjax]
-    [WebAdminAuth]
+    //[WebAdminAuth]   // 如果全局没有控制，则这里需要处理
     [ApiController]
     [Route("api/[controller]/[action]")]
     public class BaseApiController:ControllerBase
     {
- 
     }
-
-
+    
     #region 系统配置信息
 
     /// <summary>
@@ -38,6 +35,4 @@ namespace OSS.Core.AdminUI.Apis
     }
 
     #endregion
-
-
 }

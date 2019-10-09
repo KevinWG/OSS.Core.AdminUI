@@ -1,19 +1,19 @@
 ﻿var OssUtil = {
-    /**
-*  检查结果是否存在，如果不存在转到404页
-* @param {} res 
-* @returns {} 
-*/
+//    /**
+//*  检查结果是否存在，如果不存在转到404页
+//* @param {} res 
+//* @returns {} 
+//*/
     checkRes404: function(res) {
         if (res.ret === 1404) {
             this.go404();
         }
     },
 
-    /**
-     * 转到404页
-     * @returns {} 
-     */
+    ///**
+    // * 转到404页
+    // * @returns {} 
+    // */
     go404: function() {
         goTo("/un/notfound");
     },

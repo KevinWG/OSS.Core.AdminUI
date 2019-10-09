@@ -26,19 +26,22 @@
 
                         <div class="invalid-feedback">{{ errors.first('user_name') }}</div>
                     </div>
-                    <div class="input-group mb-4">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
                                 <i class="icon-lock"></i>
                             </span>
                         </div>
-                        @*is-invalid*@
-                        <input class="form-control" type="password" v-model="login.password" name="password" placeholder="请输入密码！">
-                        <div class="invalid-feedback"></div>
+ 
+                        <input class="form-control" type="password" v-model="login.password" name="password"
+                               v-bind:class="{ 'is-invalid':errors.has('user_name')}"
+                               v-validate="'required'" data-vv-as="用户名"
+                               placeholder="请输入密码！">
+                        <div class="invalid-feedback">{{ errors.first('password') }}</div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <button class="btn btn-primary px-4" type="button">Login</button>
+                            <button class="btn btn-primary px-4" @@click="submit" type="button">Login</button>
                         </div>
                         <div class="col-6 text-right">
                             <button class="btn btn-link px-0" type="button">Forgot password?</button>
@@ -64,16 +67,15 @@
 
 @section Scripts
 {
-
-
     <script>
 
-        $(function () {
+        $(function() {
             Vue.use(VeeValidate, { events: "blur", locale: "zh_CN" });
             OssPjaxEvents.pageLoaded = initailLogin;
         });
 
         var pagVue;
+
         //初始化页面验证
         function initailLogin() {
             pagVue = new Vue({
@@ -86,28 +88,29 @@
                 },
                 methods:
                 {
-                    submit: function (event) {
+                    submit: function(event) {
                         var self = this;
-                        this.$validator.validateAll().then(function (vr) {
+                        this.$validator.validateAll().then(function(vr) {
                             if (!vr)
                                 return;
 
                             var data = self.login;
                             var url = "/api/portal/codelogin";
 
-                            // OssApi.postBtn($(event.target), url, data,true)
-                            //     .done(function(res) {
-                            //        if (res.isOK) {
-                            //             goTo(!res.r_url ? "/plat/list" : res.r_url);
-                            //        } else {
-                            //            OssTips.showTipError(res.msg);
-                            //        }
-                            //    });
+                            OssApi.postBtn($(event.target), url, data, true)
+                                .done(function(res) {
+                                    if (res.isOK) {
+                                        var rUrl = OssUtil.getQuery("rurl");
+                                        location.href = !rUrl ? "/" : rUrl;
+                                    } else {
+                                        OssTips.showTipError(res.msg);
+                                    }
+                                });
 
                         });
                     }
                 },
-                created: function () {
+                created: function() {
                 }
             });
 

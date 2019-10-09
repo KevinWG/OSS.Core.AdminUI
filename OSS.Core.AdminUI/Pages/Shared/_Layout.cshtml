@@ -32,7 +32,7 @@
                 <img class="img-avatar" src="~/lib/coreui/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="/portal/logout">
+                <a class="dropdown-item" href="/portal/logout" onclick="OssAuth.quit()">
                     <i class="fa cui-account-logout"></i> 注销
                     <span class="badge badge-info">42</span>
                 </a>
@@ -98,6 +98,8 @@
 </div>
 
 <partial name="Partails/_FooterScriptPartial" />
+
+<script src="~/js/site/site.auth.js"></script>
 
 <section id="oss-scripts">@RenderSection("Scripts", required: false)</section>
 <script>$(function() { app_start(@(AppInfoUtil.IsDev ? 1 : 0)) })</script>
