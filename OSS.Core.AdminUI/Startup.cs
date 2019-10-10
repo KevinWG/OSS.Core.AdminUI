@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,13 +23,17 @@ namespace OSS.Core.AdminUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             // 因为需要全站校验是否登录，所以这里是全局处理
             // 否则接口Controller基类处理即可，所有ajax请求统一处理，授权登录跳转，纯页面元素本身无需校验 
-            services.AddControllers(opt => { opt.Filters.Add(new WebAdminAuthAttribute()); });
-            services.AddRazorPages(opt =>
-            {
-                opt.Conventions.ConfigureFilter(new PageETageFilter());
-            });
+            services.AddControllers(opt => { opt.Filters.Add(new WebAdminAuthAttribute()); })
+                .AddJsonOptions(jsonOpt =>
+                {
+                    jsonOpt.JsonSerializerOptions.IgnoreNullValues     = true;
+                    jsonOpt.JsonSerializerOptions.PropertyNamingPolicy = null;
+                });
+
+            services.AddRazorPages(opt => { opt.Conventions.ConfigureFilter(new PageETageFilter()); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,8 +1,9 @@
 ﻿var OssAuth = {
 
     auth_info: { id: 0 },
-    auth_url: "/portal/getauth",
-    auth_key:"cur_auth_info",
+
+    auth_key: "cur_auth_info",
+    auth_url: "/api/portal/GetAuthIndentity",
     auth_quit_url: "/api/portal/quit",
 
     quit: function() {
@@ -35,9 +36,10 @@
 
     getRemote: function() {
 
-        OssApi.get(this.auth_url, null, true).done(function (res) {
+        OssApi.get(this.auth_url).done(function (res) {
             var authInfo = res.isOK ? res.data.MemberInfo : { id: 0 };
-            this.UpdateAuth(authInfo);
+
+            OssAuth.UpdateAuth(authInfo);
         });
     },
 
@@ -55,33 +57,30 @@
     },
 
 
-    _updateProps: function(curU) {
-        if (!curU)
+    _updateProps: function (authInfo) {
+        if (!authInfo)
             return;
 
-        for (let p in curU) {
-            if (curU.hasOwnProperty(p)) {
-                Vue.set(this.auth_info, p, curU[p]);
+        for (let p in authInfo) {
+            if (authInfo.hasOwnProperty(p)) {
+                Vue.set(this.auth_info, p, authInfo[p]);
             }
         }
     }
 };
 
-//var adminInfoVue = new Vue({
-//    el: "#navbar-menu",
-//    data: {
-//        admin: OsAdmin.admininfo
-//    },
-//    methods: {
-//        quit: function(e) {
-//            e.preventDefault();
-//            OssApi.get("/portal/quit").done(function() {
-//                OsAdmin.UpdateAdmin({ id: 0 });
-//                window.goTo("/");
-//            });
-//        }
-//    },
-//    created: function () {
-//        OsAdmin.get();
-//    }
-//});
+var adminInfoVue = new Vue({
+    el: "#oss-page-header",
+    data: {
+        auth_info: OssAuth.auth_info
+    },
+    methods: {
+        quit: function(e) {
+            e.preventDefault();
+            OssAuth.quit();
+        }
+    },
+    created: function () {
+        OssAuth.get();
+    }
+});

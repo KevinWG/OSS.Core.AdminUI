@@ -53,11 +53,10 @@ var OssApi = {
     // * @param {} closeLoading  是否关闭Loading状态栏，默认是开启状态
     // * @returns {} 
     // */
-    get: function(url, data, closeLoading) {
+    get: function(url, closeLoading) {
         var opt = {
             type: "GET",
-            url: url,
-            data: data
+            url: url
         };
         return this._ajax(opt, closeLoading);
     },

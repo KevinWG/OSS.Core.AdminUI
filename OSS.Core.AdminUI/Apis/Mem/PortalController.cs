@@ -25,18 +25,18 @@ namespace OSS.Core.AdminUI.Apis.Mem
                 data = new MemberIdentity()
                 {
                     Id   = "1",
-                    Name = "TestName",
+                    Name = "测试",
                     MemberInfo = new
                     {
                         id   = "1",
-                        name = "TestName",
+                        name = "测试",
                         img  = "/lib/coreui/img/avatars/6.jpg"
                     }
                 }
             };
         }
 
-        [HttpPost]
+        [HttpGet]
         public AuthResp GetAuthIndentity()
         {
             string token = MemberShiper.AppAuthorize?.Token;
@@ -51,11 +51,11 @@ namespace OSS.Core.AdminUI.Apis.Mem
                 data = new MemberIdentity()
                 {
                     Id   = "1",
-                    Name = "TestName",
+                    Name = "测试",
                     MemberInfo = new
                     {
                         id   = "1",
-                        name = "TestName",
+                        name = "测试",
                         img  = "/lib/coreui/img/avatars/6.jpg"
                     }
                 }
