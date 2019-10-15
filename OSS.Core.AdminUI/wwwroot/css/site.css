@@ -22,6 +22,9 @@ html {
 .osspjax-container {
     /*width: 100%;*/
 }
+.oss-root-container { 
+    /*width: 100%;*/
+}
 
 #oss-header, #oss-scripts {
     width: 0;
