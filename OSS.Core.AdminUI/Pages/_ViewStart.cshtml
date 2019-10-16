@@ -1,7 +1,7 @@
 ﻿@using OSS.Infrastructure.Web.WebExtentions
 @{
     var isPjax = Context.Request.IsPjax();
-    Layout = isPjax ? "_LayoutPjax" : "_Layout";
+    Layout = isPjax ? "_PjaxLayout" : "_MainLayout";
     //ViewBag.IsWap = MemberShiper.AppAuthorize.AppClient == AppClientType.Wap;
 
     //var secs = AppInfoUtil.IsDev ? 5 : 60 * 60;

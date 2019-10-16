@@ -20,8 +20,8 @@
     <None Include="Pages\Portal\_PortalLayout.cshtml" />
     <None Include="Pages\Shared\Partails\_FooterScriptPartial.cshtml" />
     <None Include="Pages\Shared\Partails\_HeaderCssPartial.cshtml" />
-    <None Include="Pages\Shared\_Layout.cshtml" />
-    <None Include="Pages\Shared\_LayoutPjax.cshtml" />
+    <None Include="Pages\Shared\_MainLayout.cshtml" />
+    <None Include="Pages\Shared\_PjaxLayout.cshtml" />
     <None Include="Pages\Un\Error.cshtml" />
     <None Include="Pages\Un\NotFound.cshtml" />
     <None Include="Pages\_ViewImports.cshtml" />

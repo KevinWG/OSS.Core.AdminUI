@@ -102,7 +102,7 @@ var OssApi = {
                 // 全局错误码，跳转授权页
                 if (res.ret === 1425 && res.msg.indexOf("/") >= 0) {
                     defer.reject(xhr, txt, res);
-                    location.href =  res.msg ;
+                    goToRoot(res.msg);
                 } else
                     defer.resolve(res);
 

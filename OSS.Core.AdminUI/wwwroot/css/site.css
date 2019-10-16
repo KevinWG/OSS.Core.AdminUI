@@ -12,21 +12,18 @@ html {
 }
 
 /*页面中心区域控制 */
-#oss-page-wraper {
+#oss-root-wraper, #oss-main-wraper {
     /*height: 100%;*/
     /*position: relative;
     min-height: 100%;
     padding-bottom: 3rem;*/
 }
 
-.osspjax-container {
-    /*width: 100%;*/
-}
-.oss-root-container { 
-    /*width: 100%;*/
+.oss-root-container,.oss-main-container {
+    width: 100%;
 }
 
-#oss-header, #oss-scripts {
+#oss-root-header, #oss-root-scripts,#oss-main-header, #oss-main-scripts {
     width: 0;
     height: 0;
 }

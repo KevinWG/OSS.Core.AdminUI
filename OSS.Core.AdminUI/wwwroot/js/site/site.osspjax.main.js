@@ -1,16 +1,6 @@
-﻿var OssMainPjax = {
+﻿var OssPjaxMain = {
 
     instance: null,
-
-    changeAddressTo: function (url, title) {
-        var state = this.instance.osspjax("state");
-        if (url)
-            state.url = url;
-        if (title)
-            state.title = title;
-        this.instance.osspjax("state", "pushState" , state);
-    },
-
     events: {
         beforeRemote: OssPjaxEvents.beforeRemote,
         resultFilter: OssPjaxEvents.resultFilter,
@@ -22,13 +12,11 @@
             OssPjaxEvents.pageReplace(con);
             OssPjaxEvents.reset();
 
-            $("#oss-header").empty().append(con.subcss);
+            $("#oss-main-header").empty().append(con.mainCss);
             con.css = [];
         },
         scriptLoading: function (con) {
-            var vueTemp = con.content.find("template[oss-vue]").remove();
-
-            $("#oss-scripts").empty().append(vueTemp).append(con.scripts);
+            $("#oss-main-scripts").empty().append(con.scripts);
             con.scripts =  [];
         },
 
@@ -37,25 +25,39 @@
             OssPjaxEvents.pageLoaded(newState);
         }
     },
+    changeAddressTo: function (url, title) {
+        var state = this.instance.osspjax("state");
+        if (url)
+            state.url = url;
+        if (title)
+            state.title = title;
+        this.instance.osspjax("state", "pushState", state);
+    },
 
     start: function () {
-        var ossMainPjax = this;
+        var ossPjaxMain = this;
 
         // 初始化实例
-        ossMainPjax.instance = $("#oss-wraper").osspjax({
-            wraper: "#oss-wraper",
+        ossPjaxMain.instance = $("#oss-root-wraper").osspjax({
+            wraper: "#oss-main-wraper",
+            nameSpc: "oss-main-pjax",
+            fragment: "oss-main-container",
+
             noQuery: OssPjaxEvents.getPjaxUrl,
-            nameSpc: "oss-container",
-            method: ossMainPjax.events
+            method: ossPjaxMain.events
         });
 
         // 定义全局goTo方法
         window.goToMain = function (url, title) {
-            ossMainPjax.instance.osspjax("goTo", { url: url, title: title });
+            ossPjaxMain.instance.osspjax("goTo", { url: url, title: title });
         };
 
         // 执行第一次页面事件
-        var curState = ossMainPjax.instance.osspjax("state");
+        var curState = ossPjaxMain.instance.osspjax("state");
         OssPjaxEvents.firstPageLoad(curState);
     }
 };
+
+$(function() {
+    OssPjaxMain.start();
+});

@@ -1,12 +1,11 @@
 ﻿@using OSS.Infrastructure.Web.WebExtentions
 
 @{
-    Layout = Context.Request.IsPjax() ? "_LayoutPjax" : "_RootLayout";
+    Layout = Context.Request.IsPjax() ? "_PjaxLayout" : "_RootLayout";
 }
 @section Header{
-    <section id="oss-header">@RenderSection("Header", required: false)</section>
+    <section id="oss-main-header">@RenderSection("Header", required: false)</section>
 }
-
 
 <div class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
     <header class="app-header navbar" id="oss-page-header">
@@ -46,15 +45,18 @@
                         </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a class="nav-link" opj-namespc="oss-pjax"
-                                   href="/home/Index">
+                                <a class="nav-link" href="/"  opj-namespc="oss-main-pjax">
                                     <i class="nav-icon icon-puzzle"></i> Index
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" opj-namespc="oss-pjax"
-                                   href="/home/test1">
+                                <a class="nav-link" href="/home/test1"  opj-namespc="oss-main-pjax">
                                     <i class="nav-icon icon-puzzle"></i> Test1
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/home/test2"  opj-namespc="oss-main-pjax">
+                                    <i class="nav-icon icon-puzzle"></i> Test2
                                 </a>
                             </li>
                         </ul>
@@ -63,9 +65,11 @@
             </nav>
             <button class="sidebar-minimizer" type="button"></button>
         </div>
-        <main class="main"  id="oss-page-wraper">
-            <div class="container-fluid osspjax-container">
+        <main class="main" >
+            <div class="container-fluid" id="oss-main-wraper">
+                <div class="oss-main-container">
                     @RenderBody()
+                </div>
             </div>
         </main>
     </div>
@@ -91,6 +95,9 @@
 </div>
 
 @section Scripts{
-    <section id="oss-scripts">@RenderSection("Scripts", required: false)</section>
+    <script src="~/js/site/site.osspjax.main.js"></script>
+    <script src="~/js/site/site.auth.js"></script>
+
+    <section id="oss-main-scripts">@RenderSection("Scripts", required: false)</section>
 }
 

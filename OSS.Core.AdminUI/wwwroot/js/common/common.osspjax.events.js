@@ -3,8 +3,27 @@
     pageReplace: function(con) {},
     pageLoaded: function (newState) { },
     trans: function ($new, $old, done) { },
-    // 可扩展事件 end
+    // ======= 可扩展事件 end ======
 
+
+    reset: function () {
+        var defaultmethods = {
+            pageReplace: function () { },
+            pageLoaded: function () { },
+            trans: function ($new, $old, done) {
+                $old.hide(400);
+                $new.fadeIn(1200, done);
+            }
+        };
+        $.extend(this, defaultmethods);
+    },
+    // 页面初始化，第一次执行页面加载事件，同时过滤多个控件干扰
+    firstPageLoad: function (state) {
+        if (!this.firstLoaded) {
+            this.firstLoaded = true;
+            this.pageLoaded(state);
+        }
+    },
     //  请求开始前弹窗提示
     beforeRemote: function (ajaxOpt) {
         OssTips.showLoading(); //  开启加载框
@@ -31,23 +50,6 @@
         }
         OssTips.showTipError("当前请求超时,请稍后重试");
     },
-    reset: function() {
-        var defaultmethods = {
-            pageReplace: function() {},
-            pageLoaded: function() {},
-            trans: function($new, $old, done) {
-                $old.hide(400);
-                $new.fadeIn(1200, done);
-            }
-        };
-        $.extend(this, defaultmethods);
-    },
-    firstPageLoad: function(state) {
-        if (!this.firstLoaded) {
-            this.firstLoaded = true;
-            this.pageLoaded(state);
-        }
-    },
     getPjaxUrl: function (fullUrl) {
 
         let url = fullUrl;
@@ -55,10 +57,6 @@
 
         if (index > 0)
             url = url.substring(0, index);
-
-        //if (url.indexOf("/t/") < 0) {
-        //    url = OsTenant.getWebRoute() + url;
-        //}
 
         return url;
     },

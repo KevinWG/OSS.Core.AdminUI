@@ -1,65 +1,61 @@
-﻿var OssRootPjax = {
-
+﻿var OssPjaxRoot = {
     instance: null,
-
-    changeAddressTo: function ( url, title) {
-        var state = this.instance.osspjax("state");
-        if (url)
-            state.url = url;
-        if (title)
-            state.title = title;
-        this.instance.osspjax("state", "pushState" , state);
-    },
-
     events: {
         beforeRemote: OssPjaxEvents.beforeRemote,
         resultFilter: OssPjaxEvents.resultFilter,
         remoteError: OssPjaxEvents.remoteError,
-        beforeFormat: function ($html, con) {
-            con.subcss = $html.find("#oss-header").remove();
-            con.subscripts = $html.find("#oss-scripts").remove();
+        beforeFormat: function($html, con) {
+            con.mainCss = $html.find("#oss-main-header").remove();
+            con.mainScripts = $html.find("#oss-main-scripts").remove();
         },
-        cssLoading: function (con) {
+        cssLoading: function(con) {
             OssTips.hide(); //  关闭加载框
 
             OssPjaxEvents.pageReplace(con);
             OssPjaxEvents.reset();
 
-            $("#oss-root-header").empty().append(con.css).append(con.subcss);
-            con.css = con.subcss = [];
+            $("#oss-root-header").empty().append(con.css).append(con.mainCss);
+            con.css = con.mainCss = [];
         },
-        scriptLoading: function (con) {
-            var vueTemp = con.content.find("template[oss-vue]").remove();
-            $("#oss-root-scripts").empty().append(vueTemp);
-
-            con.scripts.each(function (i, s) {
+        scriptLoading: function(con) {
+            con.scripts.each(function(i, s) {
                 $("#oss-root-scripts").append(s);
             });
-            con.subscripts.each(function (i, s) {
+            con.mainScripts.each(function(i, s) {
                 $("#oss-root-scripts").append(s);
             });
-            con.scripts = con.subscripts = [];
+            con.scripts = con.mainScripts = [];
         },
 
-        trans: function ($new, $old, done) { OssPjaxEvents.trans($new, $old, done); },
-        complete: function (newState) {
+        trans: function($new, $old, done) { OssPjaxEvents.trans($new, $old, done); },
+        complete: function(newState) {
             OssPjaxEvents.pageLoaded(newState);
         }
     },
+    changeAddressTo: function (url, title) {
+        var state = this.instance.osspjax("state");
+        if (url)
+            state.url = url;
+        if (title)
+            state.title = title;
+        this.instance.osspjax("state", "pushState", state);
+    },
 
-    start: function (isDev) {
+    start: function(isDev) {
         var ossRootPjax = this;
 
         // 初始化实例
         ossRootPjax.instance = $(document).osspjax({
             wraper: "#oss-root-wraper",
+            nameSpc: "oss-root-pjax",
+            fragment: "oss-root-container",
+
             noQuery: OssPjaxEvents.getPjaxUrl,
-            nameSpc: "oss-root-container",
             method: ossRootPjax.events
         });
 
         // 定义全局goTo方法
-        window.goToRoot = function (url, title) {
+        window.goToRoot = function(url, title) {
             ossRootPjax.instance.osspjax("goTo", { url: url, title: title });
         };
 
@@ -74,3 +70,4 @@
         OssPjaxEvents.firstPageLoad(curState);
     }
 };
+
