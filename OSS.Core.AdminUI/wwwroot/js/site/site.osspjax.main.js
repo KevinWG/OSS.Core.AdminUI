@@ -9,8 +9,8 @@
         cssLoading: function (con) {
             OssTips.hide(); //  关闭加载框
 
-            OssPjaxEvents.pageReplace(con);
-            OssPjaxEvents.reset();
+            OssPageMethods.pageReplace(con);
+            OssPjaxEvents.resetPageMethods();
 
             $("#oss-main-header").empty().append(con.mainCss);
             con.css = [];
@@ -20,9 +20,9 @@
             con.scripts =  [];
         },
 
-        trans: function ($new, $old, done) { OssPjaxEvents.trans($new, $old, done); },
+        trans: function ($new, $old, done) { OssPageMethods.trans($new, $old, done); },
         complete: function (newState) {
-            OssPjaxEvents.pageLoaded(newState);
+            OssPageMethods.pageLoaded(newState);
         }
     },
     changeAddressTo: function (url, title) {

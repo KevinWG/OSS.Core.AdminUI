@@ -71,8 +71,7 @@ var OssApi = {
         var ajaxSetting = $.extend({
                 dataType: "json",
                 contentType: "application/json; charset=utf-8"
-            },
-            opt);
+            },opt);
 
         ajaxSetting.beforeSend = function(x) {
             x.setRequestHeader("X-App-OsVer", findVersion());

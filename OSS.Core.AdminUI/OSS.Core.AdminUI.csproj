@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\Shared\Partails\Components\" />
-    <Folder Include="wwwroot\js\pages\" />
   </ItemGroup>
 
 
@@ -17,7 +16,6 @@
     <None Include="Pages\Home\Test2.cshtml" />
     <None Include="Pages\Portal\Login.cshtml" />
     <None Include="Pages\Portal\Register.cshtml" />
-    <None Include="Pages\Portal\_PortalLayout.cshtml" />
     <None Include="Pages\Shared\Partails\_FooterScriptPartial.cshtml" />
     <None Include="Pages\Shared\Partails\_HeaderCssPartial.cshtml" />
     <None Include="Pages\Shared\_MainLayout.cshtml" />

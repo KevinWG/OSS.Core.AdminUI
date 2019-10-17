@@ -4,6 +4,7 @@
         beforeRemote: OssPjaxEvents.beforeRemote,
         resultFilter: OssPjaxEvents.resultFilter,
         remoteError: OssPjaxEvents.remoteError,
+
         beforeFormat: function($html, con) {
             con.mainCss = $html.find("#oss-main-header").remove();
             con.mainScripts = $html.find("#oss-main-scripts").remove();
@@ -11,8 +12,8 @@
         cssLoading: function(con) {
             OssTips.hide(); //  关闭加载框
 
-            OssPjaxEvents.pageReplace(con);
-            OssPjaxEvents.reset();
+            OssPageMethods.pageReplace(con);
+            OssPjaxEvents.resetPageMethods();
 
             $("#oss-root-header").empty().append(con.css).append(con.mainCss);
             con.css = con.mainCss = [];
@@ -27,9 +28,9 @@
             con.scripts = con.mainScripts = [];
         },
 
-        trans: function($new, $old, done) { OssPjaxEvents.trans($new, $old, done); },
+        trans: function($new, $old, done) { OssPageMethods.trans($new, $old, done); },
         complete: function(newState) {
-            OssPjaxEvents.pageLoaded(newState);
+            OssPageMethods.pageLoaded(newState);
         }
     },
     changeAddressTo: function (url, title) {
@@ -60,7 +61,6 @@
         };
 
         if (!isDev) { //  自动获取版本
-            OssApi.isDebug = false;
             var url = "/api/sys/opv";
             ossRootPjax.instance.osspjax("sysVer", { checkVer: true, serverUrl: url });
         }

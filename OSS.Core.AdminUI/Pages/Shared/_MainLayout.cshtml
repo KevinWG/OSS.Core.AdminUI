@@ -1,5 +1,4 @@
 ﻿@using OSS.Infrastructure.Web.WebExtentions
-
 @{
     Layout = Context.Request.IsPjax() ? "_PjaxLayout" : "_RootLayout";
 }
@@ -96,7 +95,7 @@
 
 @section Scripts{
     <script src="~/js/site/site.osspjax.main.js"></script>
-    <script src="~/js/site/site.auth.js"></script>
+    <script src="~/js/site/site.ossauth.js"></script>
 
     <section id="oss-main-scripts">@RenderSection("Scripts", required: false)</section>
 }

@@ -5,9 +5,10 @@
     auth_key: "cur_auth_info",
     auth_url: "/api/portal/GetAuthIndentity",
     auth_quit_url: "/api/portal/quit",
+    cache_seconds: 1000 * 60 * 20,
 
     quit: function() {
-        OssApi.get(this.auth_quit_url, null, true).done(function (res) {
+        OssApi.get(this.auth_quit_url).done(function (res) {
             if (!res.isOK) {
                 OssTips.showTipError(res.msg);
             }
@@ -25,21 +26,24 @@
         if (authInfo && authInfo.id > 0) {
             var curTimespan = new Date().getTime();
 
-            if (!this.auth_info.id)
+            if (!this.auth_info.id) {
                 this._updateProps(authInfo);
+            }
 
-            if (curTimespan - 1000 * 60 * 30 > authInfo.getTimespan)
-                this.getRemote();
+            // 在缓存内，不做处理
+            if (curTimespan - OssAuth.cache_seconds > authInfo.getTimespan) {
+                return;
+            }
         }
         this.getRemote();
     },
 
-    getRemote: function() {
+    getRemote: function () {
+        return OssApi.get(this.auth_url).done(function (res) {
 
-        OssApi.get(this.auth_url).done(function (res) {
             var authInfo = res.isOK ? res.data.MemberInfo : { id: 0 };
-
             OssAuth.UpdateAuth(authInfo);
+
         });
     },
 

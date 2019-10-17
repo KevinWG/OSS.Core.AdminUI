@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OSS.Infrastructure.Utils;
 using OSS.Infrastructure.Web.Middlewares.Web;
 
@@ -14,12 +15,13 @@ namespace OSS.Core.AdminUI.Apis
     public class BaseApiController:ControllerBase
     {
     }
-    
+
     #region 系统配置信息
 
     /// <summary>
     /// 系统基础信息
     /// </summary>
+    [AllowAnonymous]
     [Route("api/[controller]/[action]")]
     public class SysController : ControllerBase
     {

@@ -73,12 +73,5 @@ namespace OSS.Core.AdminUI.Apis.Mem
 
 
 
-    [AllowAnonymous]
-    public class AnonymousModel : PageModel
-    {
-        public void OnGet()
-        {
-        }
 
-    }
 }

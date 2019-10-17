@@ -1,12 +1,13 @@
-﻿var OssPjaxEvents = {
+﻿var OssPageMethods = {
     // ======= 可扩展事件 ======
-    pageReplace: function(con) {},
+    pageReplace: function (con) { },
     pageLoaded: function (newState) { },
-    trans: function ($new, $old, done) { },
+    trans: function ($new, $old, done) { }
     // ======= 可扩展事件 end ======
+};
 
-
-    reset: function () {
+var OssPjaxEvents = {
+    resetPageMethods: function () {
         var defaultmethods = {
             pageReplace: function () { },
             pageLoaded: function () { },
@@ -15,13 +16,13 @@
                 $new.fadeIn(1200, done);
             }
         };
-        $.extend(this, defaultmethods);
+        $.extend(OssPageMethods, defaultmethods);
     },
     // 页面初始化，第一次执行页面加载事件，同时过滤多个控件干扰
     firstPageLoad: function (state) {
         if (!this.firstLoaded) {
             this.firstLoaded = true;
-            this.pageLoaded(state);
+            OssPageMethods.pageLoaded(state);
         }
     },
     //  请求开始前弹窗提示

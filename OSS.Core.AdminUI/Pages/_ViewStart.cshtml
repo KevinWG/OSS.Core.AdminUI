@@ -1,7 +1,9 @@
 ﻿@using OSS.Infrastructure.Web.WebExtentions
 @{
-    var isPjax = Context.Request.IsPjax();
-    Layout = isPjax ? "_PjaxLayout" : "_MainLayout";
+    // 如果是main模块，直接执行PjaxLayout，否则执行MainLayout往下层执行
+    var isMainPjax = Context.Request.IsPjax("oss-main-pjax");
+    Layout = isMainPjax ? "_PjaxLayout" : "_MainLayout";
+
     //ViewBag.IsWap = MemberShiper.AppAuthorize.AppClient == AppClientType.Wap;
 
     //var secs = AppInfoUtil.IsDev ? 5 : 60 * 60;
