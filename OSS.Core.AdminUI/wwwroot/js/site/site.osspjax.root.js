@@ -1,34 +1,16 @@
 ﻿var OssPjaxRoot = {
     instance: null,
     events: {
-        beforeRemote: OssPjaxEvents.beforeRemote,
-        resultFilter: OssPjaxEvents.resultFilter,
-        remoteError: OssPjaxEvents.remoteError,
+        beforeRemote: OssPjaxBase.beforeRemote,
+        resultFilter: OssPjaxBase.resultFilter,
+        remoteError: OssPjaxBase.remoteError,
 
-        beforeFormat: function ($html, con) {
-            con.mainCss = $html.find("#oss-main-header").remove();
-            con.mainScripts = $html.find("#oss-main-scripts").remove();
+        removeOld: function ($oldContainer) {
+            $oldContainer.hide(380).remove();
+            OssPjaxBase.resetPageMethods();
+            // 清理直接通过浏览器打开 指定页面js内容
+            $("#oss-root-scripts").remove();
         },
-        cssLoading: function(con) {
-            OssTips.hide(); //  关闭加载框
-
-            OssPageMethods.pageReplace(con);
-            OssPjaxEvents.resetPageMethods();
-
-            $("#oss-root-header").empty().append(con.css).append(con.mainCss);
-            con.css = con.mainCss = [];
-        },
-        scriptLoading: function(con) {
-            con.scripts.each(function(i, s) {
-                $("#oss-root-scripts").append(s);
-            });
-            con.mainScripts.each(function(i, s) {
-                $("#oss-root-scripts").append(s);
-            });
-            con.scripts = con.mainScripts = [];
-        },
-
-        trans: function($new, $old, done) { OssPageMethods.trans($new, $old, done); },
         complete: function(newState) {
             OssPageMethods.pageLoaded(newState);
         }
@@ -51,8 +33,8 @@
             nameSpc: "oss-root-pjax",
             fragment: "oss-root-container",
 
-            noQuery: OssPjaxEvents.getPjaxUrl,
-            method: ossRootPjax.events
+            noQuery: OssPjaxBase.getPjaxUrl,
+            methods: ossRootPjax.events
         });
 
         // 定义全局goTo方法
@@ -67,7 +49,7 @@
 
         // 执行第一次页面事件
         var curState = ossRootPjax.instance.osspjax("state");
-        OssPjaxEvents.firstPageLoad(curState);
+        OssPjaxBase.firstPageLoad(curState);
     }
 };
 

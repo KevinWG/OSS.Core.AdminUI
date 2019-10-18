@@ -53,7 +53,7 @@ namespace OSS.Core.AdminUI
             app.UseStaticFiles();
             app.UseRouting();
 
-            app.UseWebExceptionMiddleware(); // 初始哈全局错误
+            //app.UseWebExceptionMiddleware(); // 初始哈全局错误
             app.UseWebInitialAppInfoMiddleware();
 
             app.UseEndpoints(endpoints =>

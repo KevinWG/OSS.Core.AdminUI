@@ -2,11 +2,10 @@
 @{
     Layout = Context.Request.IsPjax() ? "_PjaxLayout" : "_RootLayout";
 }
-@section Header{
-    <section id="oss-main-header">@RenderSection("Header", required: false)</section>
-}
+@*@section Header{
+    }*@
 
-<div class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+<div class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show" id="oss-main-page">
     <header class="app-header navbar" id="oss-page-header">
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
@@ -44,17 +43,17 @@
                         </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a class="nav-link" href="/"  opj-namespc="oss-main-pjax">
+                                <a class="nav-link" href="/" opj-namespc="oss-main-pjax">
                                     <i class="nav-icon icon-puzzle"></i> Index
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/home/test1"  opj-namespc="oss-main-pjax">
+                                <a class="nav-link" href="/home/test1" opj-namespc="oss-main-pjax">
                                     <i class="nav-icon icon-puzzle"></i> Test1
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/home/test2"  opj-namespc="oss-main-pjax">
+                                <a class="nav-link" href="/home/test2" opj-namespc="oss-main-pjax">
                                     <i class="nav-icon icon-puzzle"></i> Test2
                                 </a>
                             </li>
@@ -64,9 +63,10 @@
             </nav>
             <button class="sidebar-minimizer" type="button"></button>
         </div>
-        <main class="main" >
+        <main class="main">
             <div class="container-fluid" id="oss-main-wraper">
                 <div class="oss-main-container">
+                    @RenderSection("Header", required: false)
                     @RenderBody()
                 </div>
             </div>
@@ -94,9 +94,9 @@
 </div>
 
 @section Scripts{
+    <script src="~/lib/coreui/coreui/js/coreui.min.js"></script>
     <script src="~/js/site/site.osspjax.main.js"></script>
     <script src="~/js/site/site.ossauth.js"></script>
 
     <section id="oss-main-scripts">@RenderSection("Scripts", required: false)</section>
 }
-

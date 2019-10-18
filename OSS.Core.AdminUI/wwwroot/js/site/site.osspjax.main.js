@@ -2,25 +2,16 @@
 
     instance: null,
     events: {
-        beforeRemote: OssPjaxEvents.beforeRemote,
-        resultFilter: OssPjaxEvents.resultFilter,
-        remoteError: OssPjaxEvents.remoteError,
-      
-        cssLoading: function (con) {
-            OssTips.hide(); //  关闭加载框
+        beforeRemote: OssPjaxBase.beforeRemote,
+        resultFilter: OssPjaxBase.resultFilter,
+        remoteError: OssPjaxBase.remoteError,
 
-            OssPageMethods.pageReplace(con);
-            OssPjaxEvents.resetPageMethods();
-
-            $("#oss-main-header").empty().append(con.mainCss);
-            con.css = [];
+        removeOld: function ($oldContainer) {
+            $oldContainer.hide(380).remove();
+            OssPjaxBase.resetPageMethods();
+            // 清理直接通过浏览器打开 指定页面js内容
+            $("#oss-main-scripts").remove();
         },
-        scriptLoading: function (con) {
-            $("#oss-main-scripts").empty().append(con.scripts);
-            con.scripts =  [];
-        },
-
-        trans: function ($new, $old, done) { OssPageMethods.trans($new, $old, done); },
         complete: function (newState) {
             OssPageMethods.pageLoaded(newState);
         }
@@ -38,13 +29,13 @@
         var ossPjaxMain = this;
 
         // 初始化实例
-        ossPjaxMain.instance = $("#oss-root-wraper").osspjax({
+        ossPjaxMain.instance = $("#oss-main-page").osspjax({
             wraper: "#oss-main-wraper",
             nameSpc: "oss-main-pjax",
             fragment: "oss-main-container",
 
-            noQuery: OssPjaxEvents.getPjaxUrl,
-            method: ossPjaxMain.events
+            noQuery: OssPjaxBase.getPjaxUrl,
+            methods: ossPjaxMain.events
         });
 
         // 定义全局goTo方法
@@ -54,7 +45,7 @@
 
         // 执行第一次页面事件
         var curState = ossPjaxMain.instance.osspjax("state");
-        OssPjaxEvents.firstPageLoad(curState);
+        OssPjaxBase.firstPageLoad(curState);
     }
 };
 

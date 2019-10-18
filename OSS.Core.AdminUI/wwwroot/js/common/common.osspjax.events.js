@@ -1,20 +1,15 @@
 ﻿var OssPageMethods = {
     // ======= 可扩展事件 ======
     pageReplace: function (con) { },
-    pageLoaded: function (newState) { },
-    trans: function ($new, $old, done) { }
+    pageLoaded: function (newState) { }
     // ======= 可扩展事件 end ======
 };
 
-var OssPjaxEvents = {
+var OssPjaxBase = {
     resetPageMethods: function () {
         var defaultmethods = {
             pageReplace: function () { },
-            pageLoaded: function () { },
-            trans: function ($new, $old, done) {
-                $old.hide(400);
-                $new.fadeIn(1200, done);
-            }
+            pageLoaded: function () { }
         };
         $.extend(OssPageMethods, defaultmethods);
     },

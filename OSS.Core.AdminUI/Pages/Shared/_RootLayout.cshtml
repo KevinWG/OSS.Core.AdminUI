@@ -13,11 +13,9 @@
 </head>
 <body>
 
-<section id="oss-root-header">
-    @RenderSection("Header", required: false)
-</section>
 <div id="oss-root-wraper">
     <div class="oss-root-container">
+        @RenderSection("Header", required: false)
         @RenderBody()
     </div>
 </div>
@@ -27,6 +25,7 @@
 <section id="oss-root-scripts">
     @RenderSection("Scripts", required: false)
 </section>
+
 <script>$(function() { app_start(@(AppInfoUtil.IsDev ? 1 : 0)) })</script>
 
 </body>
