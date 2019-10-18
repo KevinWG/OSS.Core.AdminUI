@@ -5,7 +5,7 @@
         resultFilter: OssPjaxEvents.resultFilter,
         remoteError: OssPjaxEvents.remoteError,
 
-        beforeFormat: function($html, con) {
+        beforeFormat: function ($html, con) {
             con.mainCss = $html.find("#oss-main-header").remove();
             con.mainScripts = $html.find("#oss-main-scripts").remove();
         },

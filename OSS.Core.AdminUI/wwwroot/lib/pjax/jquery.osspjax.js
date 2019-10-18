@@ -410,41 +410,33 @@
      * @param {any} xhr
      */
     function formatContent(html, opt, req, xhr) {
-        var con = {};
-        var $html = null;
-        con.origin = html;
-        con.isFull = /<html/i.test(html);        
+
+        var $html = $(html), $content = null;
+        var con = { origin: html, isFull: /<html/i.test(html) };
+     
+        opt.method.beforeFormat($html, con);
         
         if (con.isFull) {
-            var conReg=html.match(/<body[^>]*>([\s\S.]*)<\/body>/i);
-            if(conReg&&conReg.length>=2 ){
-                $html= $(conReg[1]);
-                var $container= $html.find("."+opt.fragment).first()
-                if ($container.length>0) {                
-                    $html = $container;
-                }
+            $content = $html.find("." + opt.fragment).first();
+            if (!$content) {
+                $content = $("<div class='" + opt.fragment + "' style='display:none'></div>");
+                var cHtml = $html.find("body").html() || $html.html();
+                if (!!cHtml)
+                    $content.append($(cHtml));
+                else
+                    $content.append($("<div class='oss-pjax-nothing'></div>"));
             }
-            if(!$html){
-                $html = $("<div></div>");
-            }    
-            var titleReg=html.match(/<title[^>]*>([\s\S.]*)<\/title>/i);
-            if(titleReg&&titleReg.length>0 ){
-                $html.append(($(titleReg[0])));
-            }   
+        } else {
+            $content = $html;
+            if (!$content.hasClass(opt.fragment))
+                $content = $html = $("<div class='" + opt.fragment + "' style='display:none'></div>").append($content);
         }
-        else{
-            $html = $(html);
-        }
-    
-        if (!$html.hasClass(opt.fragment))
-            $html = $("<div class='"+opt.fragment+"' style='display:none'></div>").append($html);
         
-        opt.method.beforeFormat($html, con);
-
         con.title = $html.find("title").last().remove().text();
         con.scripts = $html.find("script").remove();
         con.css = $html.find("link[rel='stylesheet'],style").remove();
-        con.content = $html;
+
+        con.content = $content;
 
         if (!con.title) 
             con.title = $html.attr("title") || $html.data("title") || req.title;
@@ -517,6 +509,16 @@
 
         if (!req.remote_url)
             req.remote_url = req.url;
+    }
+
+
+    /**
+     *  去掉页面中已经重复的js和css文件
+     * @param {any} con
+     */
+    function filterRepeatCssScripts(con) {
+        var cssLinks = document.getElementsByTagName('link');
+        //con.css
     }
 
     /**
