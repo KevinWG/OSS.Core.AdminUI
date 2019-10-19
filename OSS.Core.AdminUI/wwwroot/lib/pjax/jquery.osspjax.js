@@ -58,7 +58,7 @@
              * @param {any} afterShow showNew结束前必须执行的回调
              */
             showNew: function($newContainer,afterShow) {
-                $newContainer.show(200);
+                $newContainer.show("slow");
                 afterShow();
             },
             
@@ -155,7 +155,7 @@
                 $content = $body.filter("." + opt.fragment).add($body.find("." + opt.fragment)).first();
                 if (!$content.length) {
 
-                    $content = $("<div class='" + opt.fragment + "' style='display:none'></div>");
+                    $content = $("<div class='" + opt.fragment + "'></div>");
                     $content.append($body);
                 }
 
@@ -163,11 +163,11 @@
                 $html = $(this._parseHTML(html));
                 $content = $html.filter("." + opt.fragment).add($html.find("." + opt.fragment)).first();
                 if (!$content.length) {
-                    $html = $("<div class='" + opt.fragment + "' style='display:none'></div>").append($html);
+                    $html = $("<div class='" + opt.fragment + "'></div>").append($html);
                     $content = $html;
                 }
             }
-
+            $content.hide();
             con.content = $content;
             con.title = $html.find("title").last().remove().text();
             con.scripts = $html.find("script").remove();
@@ -622,7 +622,7 @@
             if (typeof option == "string" && typeof cacheData[option] == "function") {
                 internalReturn = cacheData[option].apply(cacheData, args);
             } else {
-                throw "请检查当前元素(" + $this.id +")下是否已经绑定osspjax控件，或者当前调用方法是否不存在！";
+                throw "请检查当前元素(" + options.wraper +")下是否已经绑定osspjax控件，或者当前调用方法是否不存在！";
             }
         });
 

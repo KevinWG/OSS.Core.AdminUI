@@ -1,9 +1,16 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- if ie 不支持ie10 11 -->
+<script>
+    if (/msie|trident/g.test(window.navigator.userAgent.toLowerCase())) {
+        $("<script src='/lib/es6-promise/es6-promise.min.js'/>").appendTo($("head"));
+        $("<script src='/lib/es6-promise/es6-promise.auto.min.js'/>").appendTo($("head"));
+    }
+</script>
 
 <script src="~/lib/pace-progress/js/pace.min.js"></script>
 <script src="~/lib/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
