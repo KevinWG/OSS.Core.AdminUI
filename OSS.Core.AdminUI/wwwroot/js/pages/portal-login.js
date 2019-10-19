@@ -28,7 +28,8 @@ function initailLogin() {
                         .done(function (res) {
                             if (res.isOK) {
                                 var rUrl = OssUtil.getQuery("rurl") || "/";
-                                goToRoot(rUrl);
+                               // goToRoot(rUrl); 主菜单无法出现效果
+                               location.href = rUrl;
                             } else {
                                 OssTips.showTipError(res.msg);
                             }

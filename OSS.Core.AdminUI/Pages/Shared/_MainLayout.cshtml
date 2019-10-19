@@ -2,8 +2,9 @@
 @{
     Layout = Context.Request.IsPjax() ? "_PjaxLayout" : "_RootLayout";
 }
-@*@section Header{
-    }*@
+@section Header{
+    @RenderSection("Header", required: false)
+    }
 
 <div class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show" id="oss-main-page">
     <header class="app-header navbar" id="oss-page-header">
@@ -66,7 +67,7 @@
         <main class="main">
             <div class="container-fluid" id="oss-main-wraper">
                 <div class="oss-main-container">
-                    @RenderSection("Header", required: false)
+                  
                     @RenderBody()
                 </div>
             </div>
@@ -94,7 +95,7 @@
 </div>
 
 @section Scripts{
-    <script src="~/lib/coreui/coreui/js/coreui.min.js"></script>
+
     <script src="~/js/site/site.osspjax.main.js"></script>
     <script src="~/js/site/site.ossauth.js"></script>
 
