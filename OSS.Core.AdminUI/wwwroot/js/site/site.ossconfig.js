@@ -1,4 +1,3 @@
-﻿OssConfig = {
-
-
+﻿var OssConfig = {
+    css_domain: "/"
 };

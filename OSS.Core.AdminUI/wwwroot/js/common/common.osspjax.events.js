@@ -1,7 +1,9 @@
 ﻿var OssPageMethods = {
     // ======= 可扩展事件 ======
     pageReplace: function (con) { },
-    pageLoaded: function (newState) { }
+    pageLoaded: function (newState) { },
+    beforeRemote: function (ajaxOpt) { }
+
     // ======= 可扩展事件 end ======
 };
 
@@ -19,10 +21,6 @@ var OssPjaxBase = {
             this.firstLoaded = true;
             OssPageMethods.pageLoaded(state);
         }
-    },
-    //  请求开始前弹窗提示
-    beforeRemote: function (ajaxOpt) {
-        OssTips.showLoading(); //  开启加载框
     },
     //  远程请求错误处理，如果是系统全局json错误相关，这里处理错误展示
     remoteError: function(eMsg, textState, xhr) {

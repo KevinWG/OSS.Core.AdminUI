@@ -1,38 +1,27 @@
-﻿@*
+﻿@using System.Text
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
 
-<!-- if ie 不支持ie10 11 -->
-<script>
-    if (/msie|trident/g.test(window.navigator.userAgent.toLowerCase())) {
-        $("<script src='/lib/es6-promise/es6-promise.min.js'/>").appendTo($("head"));
-        $("<script src='/lib/es6-promise/es6-promise.auto.min.js'/>").appendTo($("head"));
-    }
-</script>
+<script src="~/lib/pace-progress/js/pace.min.js" type="text/javascript"></script>
+<script src="~/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
 
-<script src="~/lib/pace-progress/js/pace.min.js"></script>
-<script src="~/lib/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+<script src="~/lib/vue/vue.js" type="text/javascript"></script>
+<script src="~/lib/vee-validate/vee-validate.js" type="text/javascript"></script>
+<script src="~/lib/vee-validate/zh_CN.js" type="text/javascript"></script>
 
+<script src="~/lib/pjax/jquery.osspjax.js" type="text/javascript"></script>
 
-<script src="~/lib/vue/vue.js"></script>
-<script src="~/lib/vee-validate/vee-validate.js"></script>
-<script src="~/lib/vee-validate/zh_CN.js"></script>
+<script src="~/js/common/common.extention.js" type="text/javascript"></script>
+<script src="~/js/common/common.osstips.js" type="text/javascript"></script>
+<script src="~/js/common/common.ossutil.js" type="text/javascript"></script>
+<script src="~/js/common/common.ossstorage.js" type="text/javascript"></script>
 
+<script src="~/js/common/common.ossapi.js" type="text/javascript"></script>
+<script src="~/js/common/common.osspjax.events.js" type="text/javascript"></script>
 
-<script src="~/lib/pjax/jquery.osspjax.js"></script>
-
-
-<script src="~/js/common/common.extention.js"></script>
-
-<script src="~/js/common/common.osstips.js"></script>
-<script src="~/js/common/common.ossutil.js"></script>
-<script src="~/js/common/common.ossstorage.js"></script>
-
-<script src="~/js/common/common.ossapi.js"></script>
-<script src="~/js/common/common.osspjax.events.js"></script>
-
-<script src="~/js/site/site.config.js"></script>
-<script src="~/js/site/site.osspjax.root.js"></script>
-<script src="~/js/site/site.start.js"></script>
+<script src="~/js/site/site.ossconfig.js" type="text/javascript"></script>
+<script src="~/js/site/site.osspjax.root.js" type="text/javascript"></script>
+<script src="~/js/site/site.start.js" type="text/javascript"></script>
