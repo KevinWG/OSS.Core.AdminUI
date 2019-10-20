@@ -7,13 +7,13 @@
         remoteError: OssPjaxBase.remoteError,
 
         removeOld: function ($oldContainer) {
-            $oldContainer.hide(380).remove();
+            OssPageMethods.beforeRemove($oldContainer);
+
+            $oldContainer.remove();
             OssPjaxBase.resetPageMethods();
+
             // 清理直接通过浏览器打开 指定页面js内容
             $("#oss-main-scripts").remove();
-        },
-        complete: function (newState) {
-            OssPageMethods.pageLoaded(newState);
         }
     },
     changeAddressTo: function (url, title) {
@@ -42,13 +42,17 @@
         window.goToMain = function (url, title) {
             ossPjaxMain.instance.osspjax("goTo", { url: url, title: title });
         };
-
-        // 执行第一次页面事件
-        var curState = ossPjaxMain.instance.osspjax("state");
-        OssPjaxBase.firstPageLoad(curState);
     }
 };
 
 $(function() {
     OssPjaxMain.start();
+    $(".sidebar-toggler").on("click.oss", function() {
+        const tName = $(this).attr("data-toggle");
+        $(this).parents(".app.sidebar-fixed").toggleClass(tName);
+    });
+    $(".sidebar-minimizer").on("click.oss", function () {
+        const $appSider = $(this).parents(".app.sidebar-fixed");
+        $appSider.toggleClass("sidebar-minimized").toggleClass("sidebar-lg-show").toggleClass("sidebar-show");//.toggleClass();
+    });
 });

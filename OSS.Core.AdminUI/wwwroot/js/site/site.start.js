@@ -1,4 +1,5 @@
-﻿if (/msie|trident/g.test(window.navigator.userAgent.toLowerCase())) {
+﻿// IE兼容
+if (/msie|trident/g.test(window.navigator.userAgent.toLowerCase())) {
     var domain = OssConfig.css_domain || "/";
 
     var es6_promise_min_js = document.createElement("script");

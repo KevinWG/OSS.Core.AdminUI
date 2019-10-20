@@ -7,7 +7,7 @@
 
     /**
      * 检查结果是否存在，如果不存在转到404页
-     * @param {any} res
+     * @param {any} res 接口响应结果
      */
     checkRes404: function (res) {
         if (res.ret === 1404) {

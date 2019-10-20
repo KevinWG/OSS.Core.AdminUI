@@ -1,11 +1,14 @@
-﻿var pagVue;
-OssPageMethods.pageLoaded = initailLogin;
-OssPageMethods.pageReplace = function() {
-    pagVue.$destroy();
-};
+﻿var portal_pag_Vue;
+
+$(function() {
+    initailLogin();
+    OssPageMethods.beforeRemove = function ($btn) {
+        portal_pag_Vue.$destroy();
+    };
+});
 //初始化页面验证
 function initailLogin() {
-    pagVue = new Vue({
+    portal_pag_Vue = new Vue({
         el: "#login-component",
         data: {
             login: {
@@ -21,8 +24,8 @@ function initailLogin() {
                     if (!vr)
                         return;
 
-                    var data = self.login;
-                    var url = "/api/portal/codelogin";
+                    const data = self.login;
+                    const url = "/api/portal/codelogin";
 
                     OssApi.postBtn($(event.target), url, data, true)
                         .done(function (res) {
@@ -36,10 +39,6 @@ function initailLogin() {
 
                 });
             }
-        },
-        created: function () {
         }
     });
-
-    return pagVue;
 }

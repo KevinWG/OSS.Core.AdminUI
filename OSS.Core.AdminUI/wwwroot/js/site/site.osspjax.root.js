@@ -6,13 +6,12 @@
         remoteError: OssPjaxBase.remoteError,
 
         removeOld: function ($oldContainer) {
-            $oldContainer.hide(380).remove();
+            OssPageMethods.beforeRemove($oldContainer);
+
+            $oldContainer.remove();
             OssPjaxBase.resetPageMethods();
             // 清理直接通过浏览器打开 指定页面js内容
             $("#oss-root-scripts").remove();
-        },
-        complete: function(newState) {
-            OssPageMethods.pageLoaded(newState);
         }
     },
     changeAddressTo: function (url, title) {
@@ -46,10 +45,6 @@
             var url = "/api/sys/opv";
             ossRootPjax.instance.osspjax("sysVer", { checkVer: true, serverUrl: url });
         }
-
-        // 执行第一次页面事件
-        var curState = ossRootPjax.instance.osspjax("state");
-        OssPjaxBase.firstPageLoad(curState);
     }
 };
 

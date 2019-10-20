@@ -35,7 +35,7 @@
 
                 const defer = $.Deferred();
                 defer.resolve(authInfo);
-                return defer;
+                return defer.promise();
             }
         }
         return  this.getRemote();

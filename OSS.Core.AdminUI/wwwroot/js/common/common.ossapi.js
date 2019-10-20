@@ -19,7 +19,7 @@ var OssApi = {
     postBtn: function($btn, url, data) {
 
         const btnText = $btn.text();
-        const loadingText = $btn.attr("loading-text");
+        const loadingText = $btn.attr("loading-text")|| "加载中";
 
         $btn.attr("oss-btn-text", btnText);
         $btn.attr("disabled", "disabled");
@@ -27,7 +27,7 @@ var OssApi = {
 
         return this.post(url, data, true).always(function() {
 
-            $btn.text($btn.attr("oss-btn-text").text());
+            $btn.text($btn.attr("oss-btn-text"));
             $btn.removeAttr("oss-btn-text");
             $btn.removeAttr("disabled");
 
