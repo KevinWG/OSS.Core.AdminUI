@@ -32,10 +32,13 @@
 
             // 在缓存内，不做处理
             if (curTimespan - OssAuth.cache_seconds > authInfo.getTimespan) {
-                return;
+
+                const defer = $.Deferred();
+                defer.resolve(authInfo);
+                return defer;
             }
         }
-        this.getRemote();
+        return  this.getRemote();
     },
 
     getRemote: function () {
@@ -85,6 +88,10 @@ var adminInfoVue = new Vue({
         }
     },
     created: function () {
-        OssAuth.get();
+        OssAuth.get().done(function (authInfo) {
+
+            // todo  加载菜单
+            $(".sidebar").sidebar();
+        });
     }
 });

@@ -18,15 +18,17 @@ var OssApi = {
     // */
     postBtn: function($btn, url, data) {
 
-        var btnText = $btn.text();
-        var loadingText = $btn.attr("loading-text");
+        const btnText = $btn.text();
+        const loadingText = $btn.attr("loading-text");
 
+        $btn.attr("oss-btn-text", btnText);
         $btn.attr("disabled", "disabled");
         $btn.text(loadingText);
 
         return this.post(url, data, true).always(function() {
 
-            $btn.text(btnText);
+            $btn.text($btn.attr("oss-btn-text").text());
+            $btn.removeAttr("oss-btn-text");
             $btn.removeAttr("disabled");
 
         });
@@ -39,7 +41,7 @@ var OssApi = {
     // * @returns {}  返回 Promise 对象
     // */
     post: function(url, data, closeLoading) {
-        var jsonData = data && JSON.stringify(data);
+        const jsonData = data && JSON.stringify(data);
         var opt = {
             type: "POST",
             url: url,
@@ -76,10 +78,6 @@ var OssApi = {
         ajaxSetting.beforeSend = function(x) {
             x.setRequestHeader("X-App-OsVer", findVersion());
         };
-
-        //if (ajaxSetting.url.indexOf("/t/")<0) {
-        //    ajaxSetting.url = OsTenant.getWebRoute() + ajaxSetting.url;
-        //}
 
         if (!closeLoading)
             OssTips.showLoading();
