@@ -1,13 +1,7 @@
-﻿/*#cb3837*/
-html {
-  
-}
-
-.hid {
+﻿.hide {
     display: none
 }
-
-.shw {
+.show {
     display: inline-block;
 }
 
@@ -22,8 +16,11 @@ html {
 .oss-root-container,.oss-main-container {
     width: 100%;
 }
-
-#oss-root-header, #oss-root-scripts,#oss-main-header, #oss-main-scripts {
+.first-root-temp {
+    width: 0;
+    height: 0;
+}
+#oss-root-header, #oss-root-scripts, #oss-main-header, #oss-main-scripts {
     width: 0;
     height: 0;
 }
@@ -97,4 +94,45 @@ html {
         transform: scale(1.0);
         -webkit-transform: scale(1.0);
     }
+}
+
+
+
+/*  登录页面  */
+.login-title {
+    height: 5rem;
+    padding-top: 2rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.login-box {
+    background-color: #fff;
+    border: #eee 1px solid;
+    border-radius: 0.5rem;
+    float: none;
+    margin: 0 auto;
+    max-width: 23rem;
+}
+
+    .login-box form {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+
+@media screen and (max-width: 767px) {
+    .login-box {
+        width: 80%;
+    }
+}
+
+.login-btn {
+    width: 30%;
+    margin-top: 0.75rem;
+}
+
+.third-section {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 12px;
 }

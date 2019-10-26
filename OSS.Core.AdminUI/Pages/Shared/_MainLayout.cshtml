@@ -2,9 +2,6 @@
 @{
     Layout = Context.Request.IsPjax() ? "_PjaxLayout" : "_RootLayout";
 }
-@section Header{
-    @RenderSection("Header", required: false)
-}
 
 <div class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show" id="oss-main-page">
     <header class="app-header navbar" id="oss-page-header">
@@ -68,6 +65,8 @@
         <main class="main">
             <div class="container-fluid" id="oss-main-wraper">
                 <div class="oss-main-container">
+                    @* 放在这里，非pjax加载的局部样式会被自然卸载，防止后续冲突 *@
+                    @RenderSection("Headers", required: false)
                     @RenderBody()
                 </div>
             </div>
@@ -95,7 +94,6 @@
 </div>
 
 @section Scripts{
-
     <script src="~/js/site/site.osspjax.main.js"></script>
     <script src="~/js/site/site.ossauth.js"></script>
 

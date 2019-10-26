@@ -31,11 +31,14 @@ namespace OSS.Core.AdminUI
                     jsonOpt.JsonSerializerOptions.PropertyNamingPolicy = null;
                 });
 
-            services.AddRazorPages(opt =>
+            var builder = services.AddRazorPages(opt =>
             {
                 opt.Conventions.ConfigureFilter(new PageETageFilter());
                 //opt.Conventions.AddPageRoute("/home/index", "/");
             });
+#if DEBUG
+            builder.AddRazorRuntimeCompilation();
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

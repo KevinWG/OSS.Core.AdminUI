@@ -1,10 +1,12 @@
 ﻿@page
-@model OSS.Core.AdminUI.Apis.AnonymousReq
+@model OSS.Infrastructure.Web.PageFilters.AnonymousPage
+@using OSS.Infrastructure.Web.WebExtentions
 
 @{
     ViewData["Title"] = "404 Page";
+    Layout = HttpContext.Request.IsPjax() ? "_PjaxLayout" : "_RootLayout";
 }
-
+ 
 <div>
     什么都没有！
 </div>

@@ -10,7 +10,8 @@
 
             $oldContainer.remove();
             OssPjaxBase.resetPageMethods();
-            // 清理直接通过浏览器打开 指定页面js内容
+
+            // 清理非pjax加载的局部js文件
             $("#oss-root-scripts").remove();
         }
     },

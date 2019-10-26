@@ -1,9 +1,11 @@
 ﻿@page
-@model OSS.Core.AdminUI.Apis.AnonymousReq
+
+@model OSS.Infrastructure.Web.PageFilters.AnonymousPage
+@using OSS.Infrastructure.Web.WebExtentions
 
 @{
     ViewData["Title"] = "出错啦！";
-    Layout = "~/Pages/Portal/_PortalLayout.cshtml";
+    Layout = HttpContext.Request.IsPjax() ? "_PjaxLayout" : "_RootLayout";
 }
 
 <div>

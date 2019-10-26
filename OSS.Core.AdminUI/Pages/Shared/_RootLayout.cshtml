@@ -8,16 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title> @ViewData["Title"] | OSS.AdminUI </title>
     <partial name="Partails/_HeaderCssPartial" />
-    @RenderSection("Header", required: false)
 </head>
 <body class="sidebar-lg-show">
+
 <div id="oss-root-wraper">
     <div class="oss-root-container">
+        @* 放在这里，非pjax加载的局部样式会被自然卸载，防止后续冲突 *@
+        @RenderSection("Headers", required: false)
         @RenderBody()
     </div>
 </div>
 
-<partial name="Partails/_FooterScriptPartial" />
+<partial name="Partails/_FooterScriptPartial"/>
+
 <section id="oss-root-scripts">
     @RenderSection("Scripts", required: false)
 </section>

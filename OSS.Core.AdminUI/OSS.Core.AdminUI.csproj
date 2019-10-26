@@ -15,7 +15,6 @@
     <None Include="Pages\Home\Test1.cshtml" />
     <None Include="Pages\Home\Test2.cshtml" />
     <None Include="Pages\Portal\Login.cshtml" />
-    <None Include="Pages\Portal\Register.cshtml" />
     <None Include="Pages\Shared\Partails\_FooterScriptPartial.cshtml" />
     <None Include="Pages\Shared\Partails\_HeaderCssPartial.cshtml" />
     <None Include="Pages\Shared\_MainLayout.cshtml" />
@@ -590,9 +589,10 @@
 
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
-    <PackageReference Include="OSS.Infrastructure.Web" Version="0.6.2" />
+    <PackageReference Include="OSS.Infrastructure.Web" Version="0.6.3" />
   </ItemGroup>
 
 </Project>
