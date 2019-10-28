@@ -568,7 +568,6 @@
     <None Include="wwwroot\lib\jqupload\jquery.iframe-transport.js" />
     <None Include="wwwroot\lib\jqupload\jquery.ui.widget.js" />
     <None Include="wwwroot\lib\jqupload\jquery.xdr-transport.js" />
-    <None Include="wwwroot\lib\oss\oss.grid.js" />
     <None Include="wwwroot\lib\oss\oss.tree.js" />
     <None Include="wwwroot\lib\pace-progress\css\pace.css.map" />
     <None Include="wwwroot\lib\pace-progress\css\pace.min.css.map" />

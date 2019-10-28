@@ -1,4 +1,4 @@
-﻿/**
+﻿   /**
     *
     *  数据格式：[{id:1,name:"ceshi", parentId:0 , children:[{..}] }]
     *
@@ -117,9 +117,9 @@
 
         }
     };
-    var OSTree = function (element, option) {
-
-        var opt = option;
+    var OSTree = function(element, option) {
+    
+        const opt = option;
 
         if (opt.isRemote) {
             opt.isDeferred = true;
@@ -139,7 +139,7 @@
         opt.methods.dataBound = convertToFunc(opt.methods.dataBound);
         opt.methods.dataBounding = convertToFunc(opt.methods.dataBounding);
 
-        var self = this;
+        const self = this;
 
         self.opt = opt;
         self.firstLoad = true;
@@ -153,9 +153,9 @@
 
 
     OSTree.prototype = {
-
-        initail: function ($control, sourcePromise) {
-
+        
+        initail: function ($control,sourcePromise) {
+            
             var self = this;
             $control.children("ul").html("");
 
@@ -170,15 +170,15 @@
                     self.$element.find("ul:first").data("tree-root", true);
 
                 }
-
+            
             });
         },
 
         renderLeafs: function ($leafLi, data) {
 
-            var os = this;
-            var opt = os.opt;
-            var dataItem = $leafLi.data("tree-item-data");
+            const os = this;
+            const opt = os.opt;
+            const dataItem = $leafLi.data("tree-item-data");
 
             // 获取当前渲染数据 
             var leafItems = [];
@@ -191,7 +191,7 @@
             } else {
 
                 restData = [];
-                var parentVal = !dataItem ? opt.defaultParentVal : dataItem[opt.valueField];
+                const parentVal = !dataItem ? opt.defaultParentVal : dataItem[opt.valueField];
 
                 for (let i = 0, count = 0; i < data.length; i++) {
 
@@ -219,7 +219,7 @@
                 $ul = $("<ul></ul>");
 
                 if (!$leafLi.data("tree-contain")) {  //  不是容器自身时，默认子集ul初始化时是折叠状态
-                    $ul.hide();
+                    $ul.hide();  
                 }
                 $leafLi.append($ul);
 
@@ -236,8 +236,8 @@
             // 循环递归渲染节点
             for (let j = 0; j < leafItems.length; j++) {
 
-                var subDataItem = leafItems[j];
-                var $subLeaf = os.renderLeafDetail($ul, subDataItem);
+                const subDataItem = leafItems[j];
+                const $subLeaf = os.renderLeafDetail($ul, subDataItem);
 
                 if (!opt.isDeferred) {
                     restData = os.renderLeafs($subLeaf,
@@ -252,16 +252,16 @@
         renderLeafDetail: function ($ul, dataItem) {
             var os = this;
             var opt = os.opt;
-
+            
             // 设置叶元和数据，并绑定点击事件
             //  li 中会包含自身内容  以及  下属子节点列表的ul
-            var $leafLi = $("<li class='tree-leaf' leaf-key='" + (dataItem[opt.valueField] || '') + "'></li>");
+            const $leafLi = $("<li class='tree-leaf' leaf-key='"+(dataItem[opt.valueField]||'')+"'></li>");
             $leafLi.data("tree-item-data", dataItem);
-
+         
             //  叶元素自身内容部分
-            var $leafDiv = $("<div class='leaf-body'></div>");   //  节点内容部分
-            var $leafIcon = $("<i class='tree-icon plus'></i>");  //   节点内容 - icon 部分
-            var $leafText = opt.methods.format.call(os, dataItem);     //  节点内容 - 文本部分 ,用户可以自定义
+            const $leafDiv = $("<div class='leaf-body'></div>");   //  节点内容部分
+            const $leafIcon = $("<i class='tree-icon plus'></i>");  //   节点内容 - icon 部分
+            const $leafText = opt.methods.format.call(os,dataItem);     //  节点内容 - 文本部分 ,用户可以自定义
 
             $leafDiv.append($leafIcon);
             $leafDiv.append($leafText);
@@ -271,8 +271,8 @@
             // 内容的点击事件
             $leafDiv.off("click").on("click", function (e) {
 
-                var $leafNode = $(this).closest("li");
-                var cuDataItem = $leafNode.data("tree-item-data");
+                const $leafNode = $(this).closest("li");
+                const cuDataItem = $leafNode.data("tree-item-data");
 
                 opt.methods.chosen(cuDataItem, $leafNode);
 
@@ -297,32 +297,32 @@
          * @param {} state  要控制的状态（"open/close"），不传/空 则根据当前已有状态自动转换
          * @returns {} 
          */
-        switch: function ($leafLi, state) {
-            var os = this;
-            var opt = os.opt;
+        switch: function($leafLi,state) {
+            const os = this;
+            const opt = os.opt;
 
-            var $leafIcon = $leafLi.find(".tree-icon:first");
-            var setOpen = !state ? $leafIcon.hasClass("plus") : state === "open";
+            const $leafIcon = $leafLi.find(".tree-icon:first");
+            const setOpen = !state ? $leafIcon.hasClass("plus") : state==="open";
 
             if (setOpen) {
 
                 if (opt.isDeferred && !os.firstLoad) {
 
-                    var hasLoaded = $leafIcon.data("had-already-async");
+                    const hasLoaded = $leafIcon.data("had-already-async");
                     if (!hasLoaded) {
                         $leafIcon.data("had-already-async", true);
 
                         var parSet = getParentSet(os, $leafLi);
                         if (opt.isRemote) {
 
-                            var dataItem = $leafLi.data("tree-item-data");
-                            getSourcePromise(dataItem, opt.methods.getSource).done(function (dataList) {
+                            const dataItem = $leafLi.data("tree-item-data");
+                            getSourcePromise(dataItem, opt.methods.getSource).done(function(dataList) {
 
                                 if (dataList.length > 0) {
 
                                     os.renderLeafs($leafLi, dataList);
                                     parSet.push.apply(parSet, dataList);
-
+                                    
                                     open($leafLi, $leafIcon);
                                 }
                             });
@@ -331,12 +331,12 @@
                         } else {
 
                             if (!opt.IsIndented) {
-                                parSet = os.$element.data("temp-rest-dataset") || [];
+                                parSet = os.$element.data("temp-rest-dataset")||[];
                             }
                             os.renderLeafs($leafLi, parSet);
                         }
 
-
+                      
                     }
                 }
                 open($leafLi, $leafIcon);
@@ -347,12 +347,12 @@
                 $leafIcon.removeClass("minus").addClass("plus");
             }
 
-            function open($li, $icon) {
+            function open($li,$icon) {
                 $li.children("ul").show("slow");
                 $icon.removeClass("plus").addClass("minus");
             }
         },
-
+        
         /**
          *   添加叶节点
          * @param {} $parentLeafLi 父叶节点对象
@@ -360,10 +360,10 @@
          */
         add: function ($parentLeafLi, dataItem) {
 
-            var self = this;
+            const self = this;
 
             // 处理数据
-            var parSet = getParentSet(self, $parentLeafLi);
+            const parSet = getParentSet(self, $parentLeafLi);
             parSet.push(dataItem);
 
             // 处理节点
@@ -380,19 +380,19 @@
          */
         del: function ($leafLi) {
 
-            var self = this;
-            var currentItem = $leafLi.data("tree-item-data");
+            const self = this;
+            const currentItem = $leafLi.data("tree-item-data");
 
             // 处理数据
-            var $selfUl = $leafLi.closest("ul");
-            var isRoot = $selfUl.data("tree-root"); //  是否根节点
+            const $selfUl = $leafLi.closest("ul");
+            const isRoot = $selfUl.data("tree-root"); //  是否根节点
 
             var $parentLi = null;
             if (!isRoot) {
-                $parentLi = $selfUl.closest("li");
+                 $parentLi = $selfUl.closest("li");
             }
 
-            var parentSet = getParentSet(self, $parentLi);
+            const parentSet = getParentSet(self, $parentLi);
             removeFromArray(currentItem, parentSet);
 
             // 处理节点
@@ -408,7 +408,7 @@
          * @param {} list 【可选】要更新的数据源
          * @returns {}  如果为空返回当前完整数据源，否则返回 ostree 对象
          */
-        source: function (list) {
+        source: function(list) {
 
             if (!list) {
                 return this.dataSet;
@@ -430,7 +430,7 @@
      */
     function getSourcePromise(dataItem, source) {
 
-        var defer = $.Deferred();
+        const defer = $.Deferred();
         if ($.isFunction(source)) {
 
             source(dataItem, function (data) { defer.resolve(data); });
@@ -445,16 +445,16 @@
     function getParentSet(osObj, $parentLeafLi) {
 
         var cuSet;
-        var opt = osObj.opt;
-
+        const opt = osObj.opt;
+    
         if (!!$parentLeafLi && opt.IsIndented) {
 
-            var currentItem = $parentLeafLi.data("tree-item-data");
+            const currentItem = $parentLeafLi.data("tree-item-data");
 
             if (!currentItem[opt.childrenField]) {
                 currentItem[opt.childrenField] = [];
             }
-            cuSet = currentItem[opt.childrenField];
+            cuSet = currentItem[opt.childrenField]; 
 
         } else {
             cuSet = osObj.dataSet;
@@ -472,7 +472,7 @@
         }
         return function () { };
     }
-
+    
     function removeFromArray(obj, list) {
 
         var index;
@@ -491,7 +491,7 @@
         console.info(msg);
     }
 
-
+  
 
     var old = $.fn.ostree;
 
@@ -503,12 +503,12 @@
 
         this.each(function () {
 
-            var $this = $(this);
+            const $this = $(this);
             var cacheData = $this.data("os.tree");
             var options = typeof option == "object" && option;
 
             if (!cacheData) {
-                options = $.extend(true, {}, defaultOption, options);
+                options = $.extend(true, {},defaultOption, options);
                 $this.data("os.tree", (cacheData = new OSTree(this, options)));
             }
 
