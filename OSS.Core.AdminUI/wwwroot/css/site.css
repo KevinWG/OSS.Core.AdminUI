@@ -16,14 +16,22 @@
 .oss-root-container,.oss-main-container {
     width: 100%;
 }
-.first-root-temp {
-    width: 0;
-    height: 0;
-}
+  
+
 #oss-root-header, #oss-root-scripts, #oss-main-header, #oss-main-scripts {
     width: 0;
     height: 0;
 }
+
+.row-main {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: 15px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 6px;
+}    
+
 
 /* 提示框处理 */
 #oss-tips {
