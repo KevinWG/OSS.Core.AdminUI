@@ -11,7 +11,10 @@
 
     <script src="~/lib/oss/oss.table.js"></script>
     <script>
-        $(function() {
+        console.info("out");
+        $(function () {
+            //alert("inner")
+            console.info("inner");
             $("#test-list").osstable({
                 headers: [
                     {
