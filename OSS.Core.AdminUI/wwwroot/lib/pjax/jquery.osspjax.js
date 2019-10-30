@@ -7,10 +7,7 @@
         nameSpc: "oss-pjax",
         wraper: "#oss-wraper",
         fragment: "osspjax-container",
-
-        jsZoneClass:"oss-js-zone",
         
-
         ajaxSetting: {
             timeout: 0,
             type: "GET",
@@ -81,30 +78,27 @@
          */
         filterRepeatScripts: function (con, opt) {
             // 清除上个页面相关js，css 内容
-            $("[oss-pjax-namespc='" + opt.nameSpc + "']").remove();
+            $("script[oss-pjax-namespc='" + opt.nameSpc + "']").remove();
 
             var pageScripts = $('script');
-            con.scripts = this._filterAndSetAttr(con.scripts, pageScripts, opt.nameSpc, "src");
-        },
-        _filterAndSetAttr: function(newList, pageList, nameSpc, attrName) {
-            var resList = newList.filter(function() {
+            con.scripts.each(function () {
 
-                var nId = this[attrName] || this.id || this.innerText;
-                for (var i = 0; i < pageList.length; i++) {
-
-                    var pCssItem = pageList[i];
-                    var pCssId = pCssItem[attrName] || pCssItem.id || pCssItem.innerText;
-
-                    if (nId === pCssId) {
-                        return false;
+                var $nConItem = $(this);
+                var nId = this["src"] || this.id || this.innerText;
+               
+                for (var i = 0; i < pageScripts.length; i++) {
+                    var pageItem = pageScripts[i];
+                    var pageId = pageItem["src"] || pageItem.id || pageItem.innerText;
+                    if (nId === pageId) {
+                        console.info("请求页面地址:" + con.url + " 包含了已经存在的" + pageId+" js文件/代码,将会重新加载！")
+                        $(pageItem).remove();
+                        break;
                     }
                 }
-                if (!$(this).attr("oss-pjax-namespc")) {
-                    $(this).attr("oss-pjax-namespc", nameSpc); 
+                if (!$nConItem.attr("oss-pjax-namespc")) {
+                    $nConItem.attr("oss-pjax-namespc", opt.nameSpc);
                 }
-                return true;
             });
-            return resList;
         },
 
         addNewScript: function (con) {
@@ -126,7 +120,7 @@
                 document.body.appendChild(script);
             });
         },
-
+        
         /**
          * 格式化内容
          * @param {any} html 原始html
@@ -168,19 +162,20 @@
                 }
             }
 
-            $content.hide();
-            con.content = $content;
             con.title = this.filterAndFind($html, "title").last().remove().text();//$html.find("title").last().remove().text();
             con.scripts = this.filterAndFind($html, "script").remove();// $html.find("script").remove();
-   
+
             if (!con.title)
                 con.title = $content.attr("title") || $content.data("title") || req.title;
 
+            $content.hide();
+            con.content = $content;
             con.version = xhr.getResponseHeader("X-PJAX-Ver");
             con.url = req.url;
 
             return con;
         },
+       
         _parseHTML: function(htmlString) {
             return $.parseHTML(htmlString, document, true);
         },
@@ -210,7 +205,7 @@
             window.history.replaceState(firstState, firstState.title, firstState.url);
 
         $(element).on("click.pjax" + opt.nameSpc.replace(".", "_"),
-            "a[opj-namespc='" + opt.nameSpc + "']",
+            "a[oss-pjax-namespc='" + opt.nameSpc + "']",
             function(event) {
                 self.click(event);
             });
@@ -608,12 +603,12 @@
 
         var args = Array.apply(null, arguments);
         args.shift();
-        var internalReturn;
 
+        var internalReturn;
         this.each(function() {
 
             var $this = $(this);
-            var dataName = "os.pjax";
+            var dataName = "oss.pjax";
             
             var cacheData = $this.data(dataName);
             var options = typeof option == "object" && option;

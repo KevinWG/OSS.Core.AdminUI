@@ -21,10 +21,8 @@
 
 <partial name="Partails/_FooterScriptPartial"/>
 
-<section id="oss-root-scripts">
-    @RenderSection("Scripts", required: false)
-</section>
 
+    @RenderSection("Scripts", required: false)
 <script>$(function() { app_start(@(AppInfoUtil.IsDev ? 1 : 0)) })</script>
 
 </body>

@@ -42,17 +42,17 @@
                         </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a class="nav-link" href="/" opj-namespc="oss-main-pjax">
+                                <a class="nav-link" href="/" oss-pjax-namespc="oss-main-pjax">
                                     <i class="nav-icon icon-puzzle"></i> Index
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/home/test1" opj-namespc="oss-main-pjax">
+                                <a class="nav-link" href="/home/test1" oss-pjax-namespc="oss-main-pjax">
                                     <i class="nav-icon icon-puzzle"></i> Test1
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/home/test2" opj-namespc="oss-main-pjax">
+                                <a class="nav-link" href="/home/test2" oss-pjax-namespc="oss-main-pjax">
                                     <i class="nav-icon icon-puzzle"></i> Test2
                                 </a>
                             </li>
@@ -96,6 +96,5 @@
 @section Scripts{
     <script src="~/js/site/site.osspjax.main.js"></script>
     <script src="~/js/site/site.ossauth.js"></script>
-
-    <section id="oss-main-scripts">@RenderSection("Scripts", required: false)</section>
+    @RenderSection("Scripts", required: false)
 }

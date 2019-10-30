@@ -8,11 +8,8 @@
 
         removeOld: function ($oldContainer) {
             OssPageMethods.beforeRemove($oldContainer);
-
             $oldContainer.remove();
             OssPjaxBase.resetPageMethods();
-            // 清理非pjax加载的局部js文件
-            $("#oss-main-scripts").remove();
         }
     },
     changeAddressTo: function (url, title) {

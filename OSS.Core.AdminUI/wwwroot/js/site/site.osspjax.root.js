@@ -7,12 +7,8 @@
 
         removeOld: function ($oldContainer) {
             OssPageMethods.beforeRemove($oldContainer);
-
             $oldContainer.remove();
             OssPjaxBase.resetPageMethods();
-
-            // 清理非pjax加载的局部js文件
-            $("#oss-root-scripts").remove();
         }
     },
     changeAddressTo: function (url, title) {
@@ -29,8 +25,8 @@
 
         // 初始化实例
         ossRootPjax.instance = $(document).osspjax({
-            wraper: "#oss-root-wraper",
             nameSpc: "oss-root-pjax",
+            wraper: "#oss-root-wraper",
             fragment: "oss-root-container",
 
             noQuery: OssPjaxBase.getPjaxUrl,
