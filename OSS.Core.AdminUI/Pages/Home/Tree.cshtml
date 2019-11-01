@@ -1,0 +1,57 @@
+﻿@page
+@{
+    ViewData["Title"] = "Test1";
+}
+
+<h1>TreeTest1</h1>
+<div id="test-tree"></div>
+
+@section Scripts{
+    <script src="~/lib/oss/oss.tree.js"></script>
+    <script>
+        var opt = {
+            textField: "name",
+            valueField: "id",
+            parentField: "parentId",
+
+            isRemote: false,     //  是否远程加载，子节点会延迟渲染
+            isDeferred: false,   //  是否延迟加载，isRemote=true 时，isDeferred 恒为 true
+            isOpen: true,       //  首次加载是否全部展开状态,isDeferred=true时，isOpen 恒为 false
+
+            methods: {
+                //  获取数据源方法
+                getSource: function (proNode, callBack) {
+                    var treeData = [
+                        { id: 1, name: "ceshi1", parentId: 0 },
+                        { id: 2, name: "ceshi2", parentId: 1 },
+                        { id: 3, name: "ceshi3", parentId: 0 },
+                        { id: 4, name: "ceshi4", parentId: 2 }
+                    ];
+                    callBack(treeData);
+                },
+                //  绑定每个对象时触发
+                dataBounding: function (dateItem, leaf) {
+                    console.info("dataBounding");
+                    console.info(dateItem);
+                },
+                //  每一个层级执行完成之后事件
+                dataBound: function (data, element) {
+                    //alert("层级绑定完毕");
+                    console.info("dataBound");
+                    console.info(data);
+                },
+                //  选中事件
+                chosen: function (dataItem, element) {
+                    console.info("chosen");
+                    console.info(dataItem);
+                    //alert("被选中了！");
+                }
+            }
+        }
+
+
+        $(function () {
+            $("#test-tree").osstree(opt);
+        });
+    </script>
+}

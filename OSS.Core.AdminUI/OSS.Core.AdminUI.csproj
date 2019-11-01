@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <None Include="Pages\Home\Index.cshtml" />
-    <None Include="Pages\Home\Test1.cshtml" />
+    <None Include="Pages\Home\Tree.cshtml" />
     <None Include="Pages\Home\Test2.cshtml" />
     <None Include="Pages\Portal\Login.cshtml" />
     <None Include="Pages\Shared\Partails\_FooterScriptPartial.cshtml" />

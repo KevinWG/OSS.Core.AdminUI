@@ -34,7 +34,6 @@ namespace OSS.Core.AdminUI
             var builder = services.AddRazorPages(opt =>
             {
                 opt.Conventions.ConfigureFilter(new PageETageFilter());
-                //opt.Conventions.AddPageRoute("/home/index", "/");
             });
 #if DEBUG
             builder.AddRazorRuntimeCompilation();
@@ -56,7 +55,6 @@ namespace OSS.Core.AdminUI
             app.UseStaticFiles();
             app.UseRouting();
 
-            //app.UseWebExceptionMiddleware(); // ³õÊ¼¹þÈ«¾Ö´íÎó
             app.UseWebInitialAppInfoMiddleware();
 
             app.UseEndpoints(endpoints =>

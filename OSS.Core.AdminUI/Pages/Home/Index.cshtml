@@ -8,7 +8,7 @@
 
 @section Scripts{
 
-    <script src="~/lib/oss/oss.table.js"></script>
+    <script src="~/lib/oss/oss.table.js" oss-pjax-once="true"></script>
     <script>
         console.info("out");
         $(function () {
@@ -17,7 +17,6 @@
             $("#test-list").osstable({
                 headers: [
                     {
-                      
                         title: "名称",
                         col_name: "name",
                         col_format: null
@@ -25,17 +24,17 @@
                     {
                         title: "操作",
                         col_name: "id",
-                        col_format: function(rowData) {
+                        col_format: function (rowData) {
                             return "<button onclick=\"alert('" + rowData.id + "')\"> 修改</button>";
                         }
                     }
                 ],
                 methods: {
                     //  获取数据源方法
-                    getSource: function(proNode, callBack) {
+                    getSource: function (proNode, callBack) {
                         var list = {
                             total: 40,
-                            data:[
+                            data: [
                                 { id: 1, name: "ceshi1" },
                                 { id: 2, name: "ceshi2" },
                                 { id: 3, name: "ceshi3" },
