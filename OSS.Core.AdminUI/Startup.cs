@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OSS.Infrastructure.Web.Middlewares;
 using OSS.Infrastructure.Web.Middlewares.Web.Auth;
-using OSS.Infrastructure.Web.PageFilters;
 using OSS.Tools.Config;
 
 namespace OSS.Core.AdminUI
@@ -31,10 +30,8 @@ namespace OSS.Core.AdminUI
                     jsonOpt.JsonSerializerOptions.PropertyNamingPolicy = null;
                 });
 
-            var builder = services.AddRazorPages(opt =>
-            {
-                opt.Conventions.ConfigureFilter(new PageETageFilter());
-            });
+            var builder = services.AddRazorPages();
+
 #if DEBUG
             builder.AddRazorRuntimeCompilation();
 #endif

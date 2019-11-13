@@ -1,19 +1,13 @@
-﻿@using OSS.Infrastructure.Web.WebExtentions
+﻿@using OSS.Infrastructure.Utils
+@using OSS.Infrastructure.Web.WebExtentions
 @{
     // 如果是main模块，直接执行PjaxLayout，否则执行MainLayout往下层执行
     var isMainPjax = Context.Request.IsPjax("oss-main-pjax");
     Layout = isMainPjax ? "_PjaxLayout" : "_MainLayout";
 
-    //ViewBag.IsWap = MemberShiper.AppAuthorize.AppClient == AppClientType.Wap;
-
-    //var secs = AppInfoUtil.IsDev ? 5 : 60 * 60;
-
-    //Context.Response.Headers[HeaderNames.CacheControl] = $"public,max-age={secs}";
-    //Context.Response.Headers[HeaderNames.ETag] = AppWebInfoUtil.GetPjaxTagWithTenant();
-
-    //var pVer = Context.Request.Headers["X-PJAX-Ver"].FirstOrDefault();
-    //if (!string.IsNullOrEmpty(pVer) && AppInfoUtil.AppVersion != pVer)
-    //{
-    //    Context.Response.Headers["X-PJAX-Ver"] = AppInfoUtil.AppVersion;
-    //}
+    var pVer = Context.Request.Headers["X-PJAX-Ver"].FirstOrDefault();
+    if (!string.IsNullOrEmpty(pVer) && AppInfoUtil.AppVersion != pVer)
+    {
+        Context.Response.Headers["X-PJAX-Ver"] = AppInfoUtil.AppVersion;
+    }
 }
