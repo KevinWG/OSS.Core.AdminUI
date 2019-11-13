@@ -4,14 +4,37 @@
 .show {
     display: inline-block;
 }
+ul {
+    list-style-type: none;
+    margin: 0px;
+}
+.tree-icon {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.33333333em;
+    line-height: .75em;
+    vertical-align: -15%;
 
-/*页面中心区域控制 */
-#oss-root-wraper, #oss-main-wraper {
-    /*height: 100%;*/
-    /*position: relative;
+}
+    .tree-icon.plus:before {
+        content: "\f055";
+    }
+    .tree-icon.minus:before { content: "\f056"; }
+.oss-tree .leaf-text {
+    margin-left: 0.5rem;
+}
+
+    /*页面中心区域控制 */
+    #oss-root-wraper, #oss-main-wraper {
+        /*height: 100%;*/
+        /*position: relative;
     min-height: 100%;
     padding-bottom: 3rem;*/
-}
+    }
 
 .oss-root-container,.oss-main-container {
     width: 100%;

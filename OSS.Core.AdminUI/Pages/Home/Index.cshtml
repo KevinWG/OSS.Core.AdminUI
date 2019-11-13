@@ -4,16 +4,11 @@
 }
 
 <div id="test-list" class="row-main"></div>
-
-
 @section Scripts{
 
     <script src="~/lib/oss/oss.table.js" oss-pjax-once="true"></script>
     <script>
-        console.info("out");
         $(function () {
-            //alert("inner")
-            console.info("inner");
             $("#test-list").osstable({
                 headers: [
                     {
